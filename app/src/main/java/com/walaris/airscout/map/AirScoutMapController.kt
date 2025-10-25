@@ -32,6 +32,8 @@ class AirScoutMapController(
         fun onAddCameraRequested(initialLocation: GeoPoint?)
         fun onCameraRemoved(camera: AxisCamera)
         fun onCameraInventoryChanged()
+        fun onResourceListRequested(targetCamera: AxisCamera?)
+        fun onCameraEditRequested(camera: AxisCamera)
     }
 
     private val listeners = CopyOnWriteArraySet<Listener>()
@@ -188,7 +190,13 @@ class AirScoutMapController(
         val marker = item as? Marker ?: return
         val camera = cameras[marker.uid] ?: return
         when (action) {
-            AirScoutMenuFactory.MenuAction.CONTROL -> {
+            AirScoutMenuFactory.MenuAction.RESOURCES -> {
+                listeners.forEach { it.onResourceListRequested(camera) }
+            }
+            AirScoutMenuFactory.MenuAction.EDIT -> {
+                listeners.forEach { it.onCameraEditRequested(camera) }
+            }
+            AirScoutMenuFactory.MenuAction.PREVIEW -> {
                 listeners.forEach { it.onCameraSelected(camera) }
             }
             AirScoutMenuFactory.MenuAction.CENTER -> {

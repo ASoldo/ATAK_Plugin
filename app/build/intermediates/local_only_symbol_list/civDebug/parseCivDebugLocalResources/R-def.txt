@@ -16,6 +16,8 @@ drawable ic_edit
 drawable ic_frustum
 drawable ic_launcher
 drawable ic_location
+drawable ic_menu_edit
+drawable ic_menu_resources
 drawable ic_plugin_badge
 drawable ic_plugin_badge_camera
 drawable ic_preview

@@ -124,4 +124,14 @@ class AirScoutPlugin(
     override fun onCameraInventoryChanged() {
         // no-op
     }
+
+    override fun onResourceListRequested(targetCamera: AxisCamera?) {
+        showPane()
+        paneController.showResourceCatalog(targetCamera)
+    }
+
+    override fun onCameraEditRequested(camera: AxisCamera) {
+        showPane()
+        paneController.editCamera(camera)
+    }
 }
