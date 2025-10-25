@@ -377,8 +377,9 @@ class AirScoutMapController(
         }
         val arrowBase = GeoPoint(center.latitude, center.longitude, altitude)
         val arrowHead = GeoCalculations.pointAtDistance(center, bearing, range)
-        val arrowLeft = GeoCalculations.pointAtDistance(arrowHead, bearing + 150.0, range * 0.1)
-        val arrowRight = GeoCalculations.pointAtDistance(arrowHead, bearing - 150.0, range * 0.1)
+        val arrowLeft = GeoCalculations.pointAtDistance(arrowHead, bearing + 160.0, range * 0.05)
+        val arrowRight = GeoCalculations.pointAtDistance(arrowHead, bearing - 160.0, range * 0.05)
+        val midPoint = GeoCalculations.pointAtDistance(center, bearing, range * 0.5)
         arrowShape.setPoints(arrayOf(
             arrowBase,
             GeoPoint(arrowHead.latitude, arrowHead.longitude, altitude),
@@ -398,12 +399,35 @@ class AirScoutMapController(
         } else {
             arrowShape.refresh(mapView.getMapEventDispatcher(), null, javaClass)
         }
+
+        val pointId = "${camera.uid}-fovpoint"
+        val existingPoint = mapView.getMapItem(pointId) as? Circle
+        val pointRadius = (range * 0.03).coerceAtLeast(5.0)
+        val pointCircle = existingPoint ?: Circle(GeoPointMetaData.wrap(midPoint), pointRadius, pointId).apply {
+            setMetaBoolean("archive", false)
+            setMetaBoolean("editable", false)
+        }
+        pointCircle.setCenterPoint(GeoPointMetaData.wrap(GeoPoint(midPoint.latitude, midPoint.longitude, altitude)))
+        pointCircle.setRadius(pointRadius)
+        pointCircle.setColor(FOV_STROKE_COLOR)
+        pointCircle.setStrokeColor(FOV_STROKE_COLOR)
+        pointCircle.setStrokeWeight(2.0)
+        pointCircle.setFillColor(Color.TRANSPARENT)
+        pointCircle.setMetaString("parent_uid", camera.uid)
+        pointCircle.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        pointCircle.setTitle(context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        if (existingPoint == null) {
+            mapView.getRootGroup().addItem(pointCircle)
+        } else {
+            pointCircle.refresh(mapView.getMapEventDispatcher(), null, javaClass)
+        }
     }
 
     private fun clearFrustumOverlay(cameraId: String) {
         mapView.getMapItem("$cameraId-ring")?.removeFromGroup()
         mapView.getMapItem("$cameraId-fovshape")?.removeFromGroup()
         mapView.getMapItem("$cameraId-fovarrow")?.removeFromGroup()
+        mapView.getMapItem("$cameraId-fovpoint")?.removeFromGroup()
     }
 
     companion object {
