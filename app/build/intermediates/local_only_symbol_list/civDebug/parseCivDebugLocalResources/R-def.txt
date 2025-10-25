@@ -22,7 +22,7 @@ id overlayRemove
 id removeCameraButton
 id selectedFeedLabel
 id statusMessage
-id videoSurface
+id videoPlayerView
 layout airscout_pane
 layout overlay_airscout_camera_actions
 layout overlay_airscout_footer

@@ -2,7 +2,6 @@
 package com.walaris.airscout.databinding;
 
 import android.view.LayoutInflater;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.media3.ui.PlayerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.walaris.airscout.R;
@@ -38,19 +38,19 @@ public final class AirscoutPaneBinding implements ViewBinding {
   public final TextView statusMessage;
 
   @NonNull
-  public final SurfaceView videoSurface;
+  public final PlayerView videoPlayerView;
 
   private AirscoutPaneBinding(@NonNull FrameLayout rootView, @NonNull Button addCameraButton,
       @NonNull DualJoystickView joystickOverlay, @NonNull Button removeCameraButton,
       @NonNull TextView selectedFeedLabel, @NonNull TextView statusMessage,
-      @NonNull SurfaceView videoSurface) {
+      @NonNull PlayerView videoPlayerView) {
     this.rootView = rootView;
     this.addCameraButton = addCameraButton;
     this.joystickOverlay = joystickOverlay;
     this.removeCameraButton = removeCameraButton;
     this.selectedFeedLabel = selectedFeedLabel;
     this.statusMessage = statusMessage;
-    this.videoSurface = videoSurface;
+    this.videoPlayerView = videoPlayerView;
   }
 
   @Override
@@ -110,14 +110,14 @@ public final class AirscoutPaneBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.videoSurface;
-      SurfaceView videoSurface = ViewBindings.findChildViewById(rootView, id);
-      if (videoSurface == null) {
+      id = R.id.videoPlayerView;
+      PlayerView videoPlayerView = ViewBindings.findChildViewById(rootView, id);
+      if (videoPlayerView == null) {
         break missingId;
       }
 
       return new AirscoutPaneBinding((FrameLayout) rootView, addCameraButton, joystickOverlay,
-          removeCameraButton, selectedFeedLabel, statusMessage, videoSurface);
+          removeCameraButton, selectedFeedLabel, statusMessage, videoPlayerView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,14 +1,16 @@
 package com.walaris.airscout.core
 
 import android.content.Context
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Base64
-import android.view.SurfaceHolder
+import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 import com.atakmap.coremap.log.Log
-import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.ExecutorService
@@ -21,7 +23,7 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 
 /**
- * Handles Axis PTZ command dispatch, optional event channel bridging, and RTSP playback.
+ * Handles Axis PTZ command dispatch, optional event channel bridging, and video playback.
  */
 class AxisCameraController(context: Context) {
 
@@ -34,17 +36,17 @@ class AxisCameraController(context: Context) {
 
     private val httpClient = OkHttpClient()
 
-    private var mediaPlayer: MediaPlayer? = null
-    private var currentSurface: SurfaceHolder? = null
+    private var player: ExoPlayer? = null
+    private var currentPlayerView: PlayerView? = null
     private var currentCamera: AxisCamera? = null
     private val webSocketRef = AtomicReference<WebSocket?>()
 
-    fun startStream(surface: SurfaceHolder, camera: AxisCamera, onError: (Throwable) -> Unit) {
+    fun startStream(playerView: PlayerView, camera: AxisCamera, onError: (Throwable) -> Unit) {
         uiHandler.post {
-            currentSurface = surface
+            currentPlayerView = playerView
             currentCamera = camera
             closeEventChannel()
-            initializePlayer(camera.rtspUrl, onError)
+            initializePlayer(playerView, camera.rtspUrl, onError)
         }
     }
 
@@ -54,8 +56,15 @@ class AxisCameraController(context: Context) {
 
     fun reconnectStream(onError: (Throwable) -> Unit) {
         val camera = currentCamera ?: return
-        val surface = currentSurface ?: return
-        startStream(surface, camera, onError)
+        val playerView = currentPlayerView ?: return
+        startStream(playerView, camera, onError)
+    }
+
+    fun detachPlayerView() {
+        uiHandler.post {
+            currentPlayerView?.player = null
+            currentPlayerView = null
+        }
     }
 
     fun connectEventChannel(camera: AxisCamera, listener: (String) -> Unit) {
@@ -106,25 +115,29 @@ class AxisCameraController(context: Context) {
         dispatchControl(camera, mapOf("gotopresetname" to preset))
     }
 
-    private fun initializePlayer(source: String, onError: (Throwable) -> Unit) {
+    private fun initializePlayer(targetView: PlayerView, source: String, onError: (Throwable) -> Unit) {
         releasePlayer()
-        val surface = currentSurface ?: return
-        val player = MediaPlayer()
-        mediaPlayer = player
+        if (source.isBlank()) {
+            onError.invoke(IllegalArgumentException("Empty stream URL"))
+            return
+        }
         try {
-            player.setSurface(surface.surface)
-            val uri = runCatching { Uri.parse(source) }.getOrNull()
-            if (uri != null && !uri.scheme.isNullOrBlank()) {
-                player.setDataSource(appContext, uri)
-            } else {
-                player.setDataSource(source)
+            val player = ExoPlayer.Builder(appContext).build().apply {
+                addListener(object : Player.Listener {
+                    override fun onPlayerError(error: PlaybackException) {
+                        onError.invoke(error)
+                    }
+                })
             }
-            player.setOnPreparedListener { it.start() }
-            player.setOnErrorListener { _, what, extra ->
-                onError.invoke(IOException("Media error what=$what extra=$extra"))
-                true
-            }
-            player.prepareAsync()
+            this.player = player
+            targetView.player = player
+            val mediaItem = runCatching { Uri.parse(source) }
+                .map { MediaItem.fromUri(it) }
+                .getOrDefault(MediaItem.fromUri(source))
+            player.setMediaItem(mediaItem)
+            player.prepare()
+            player.playWhenReady = true
+            player.play()
         } catch (ex: Exception) {
             releasePlayer()
             onError.invoke(ex)
@@ -132,17 +145,16 @@ class AxisCameraController(context: Context) {
     }
 
     private fun releasePlayer() {
-        mediaPlayer?.let {
+        player?.let {
             try {
                 it.stop()
             } catch (_: Exception) {
             } finally {
-                it.reset()
                 it.release()
             }
         }
-        mediaPlayer = null
-        currentSurface = null
+        player = null
+        currentPlayerView?.player = null
     }
 
     private fun dispatchControl(camera: AxisCamera, params: Map<String, String>) {

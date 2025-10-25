@@ -1,7 +1,6 @@
 package com.walaris.airscout.ui
 
 import android.content.Context
-import android.view.SurfaceHolder
 import android.view.View
 import android.widget.Toast
 import com.atakmap.android.maps.MapView
@@ -19,14 +18,11 @@ class AirScoutPaneController(
     private val context: Context,
     private val mapController: AirScoutMapController,
     private val cameraController: AxisCameraController
-) : SurfaceHolder.Callback,
-    DualJoystickView.JoystickListener,
+) : DualJoystickView.JoystickListener,
     AirScoutMapController.Listener {
 
     private var binding: AirscoutPaneBinding? = null
     private var currentCamera: AxisCamera? = null
-    private var surfaceReady = false
-    private var pendingCameraSelection: String? = null
 
     fun bind(root: View) {
         binding = AirscoutPaneBinding.bind(root)
@@ -36,18 +32,16 @@ class AirScoutPaneController(
     }
 
     fun unbind() {
-        binding?.videoSurface?.holder?.removeCallback(this)
         binding?.joystickOverlay?.listener = null
         cameraController.stopStream()
         cameraController.closeEventChannel()
+        cameraController.detachPlayerView()
         binding = null
         mapController.unregisterListener(this)
-        pendingCameraSelection = null
     }
 
     private fun setupUi() {
         val ui = binding ?: return
-        ui.videoSurface.holder.addCallback(this)
         ui.joystickOverlay.listener = this
 
         ui.addCameraButton.setOnClickListener {
@@ -90,13 +84,8 @@ class AirScoutPaneController(
     private fun startStreamIfReady() {
         val camera = currentCamera ?: return
         val ui = binding ?: return
-        if (!surfaceReady) {
-            pendingCameraSelection = camera.uid
-            return
-        }
-        cameraController.stopStream()
         cameraController.closeEventChannel()
-        cameraController.startStream(ui.videoSurface.holder, camera) { error ->
+        cameraController.startStream(ui.videoPlayerView, camera) { error ->
             updateStatus(context.getString(R.string.status_stream_error, error.localizedMessage ?: ""))
         }
         cameraController.connectEventChannel(camera) { }
@@ -131,26 +120,6 @@ class AirScoutPaneController(
                 }
             })
         }
-    }
-
-    // Surface callbacks
-    override fun surfaceCreated(holder: SurfaceHolder) {
-        surfaceReady = true
-        pendingCameraSelection?.let { uid ->
-            currentCamera = mapController.getCamera(uid)
-            pendingCameraSelection = null
-        }
-        startStreamIfReady()
-    }
-
-    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        // no-op
-    }
-
-    override fun surfaceDestroyed(holder: SurfaceHolder) {
-        surfaceReady = false
-        cameraController.stopStream()
-        cameraController.closeEventChannel()
     }
 
     // Joystick listener

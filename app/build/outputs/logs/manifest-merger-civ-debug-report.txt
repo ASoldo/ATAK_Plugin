@@ -12,6 +12,28 @@ INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintempla
 INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:1:1-33:12
 INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:1:1-33:12
 MERGED from [androidx.databinding:viewbinding:8.13.0] /home/rootster/.gradle/caches/8.13/transforms/433455941a1460a5c83ee65b2382278d/transformed/viewbinding-8.13.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.media3:media3-ui:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0593744ef9cde04f6223968c758b0685/transformed/media3-ui-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-extractor:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0a3a3a7bdc798189f5014bbf69f53f7d/transformed/media3-extractor-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-container:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/f0acec949c4c7d8edbbfdd34a43cd9a2/transformed/media3-container-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-datasource:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/1f5ddf6742b1bfa8cbb6b8883746a8ce/transformed/media3-datasource-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-decoder:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/9ece5e8f1310544ecb48e73717a6a039/transformed/media3-decoder-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-database:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/74155c2a5ef708e150ddd07b31ba88c1/transformed/media3-database-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-common:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0ba1af4411e80b6531e4b7e4302a9d39/transformed/media3-common-1.4.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/cc824d6adfb359c804e781904a239b49/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.7.0] /home/rootster/.gradle/caches/8.13/transforms/79f91400238beafb724d3fda37a03345/transformed/media-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/rootster/.gradle/caches/8.13/transforms/a1166f2b5b8408f385d6092316e90c4c/transformed/recyclerview-1.3.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /home/rootster/.gradle/caches/8.13/transforms/c25c004d4be7a8e1181d3fbfcad89131/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/da281c11d729a390f9b52865bb10e17a/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/rootster/.gradle/caches/8.13/transforms/224b800c1688334a890b1de02422e3bf/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/rootster/.gradle/caches/8.13/transforms/2ebf9f65567791ba8234685d1319ff69/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] /home/rootster/.gradle/caches/8.13/transforms/93d5a33325f581483096101957d121de/transformed/exifinterface-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/rootster/.gradle/caches/8.13/transforms/7220e38c51242bb10a3327b27b380012/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/d4abcbd69790774a976c2bc3b1513bfd/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] /home/rootster/.gradle/caches/8.13/transforms/7a5290b2ae357e0174c549442ad22b71/transformed/tracing-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/1cf234875fceeae89cfa877d342ae76a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/rootster/.gradle/caches/8.13/transforms/760271c1be6ee8eb92cdcdda54cbec95/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
 	package
 		INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -30,13 +52,27 @@ ADDED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/
 		ADDED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:5:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:6:5-79
+MERGED from [androidx.media3:media3-common:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0ba1af4411e80b6531e4b7e4302a9d39/transformed/media3-common-1.4.1/AndroidManifest.xml:22:5-79
+MERGED from [androidx.media3:media3-common:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0ba1af4411e80b6531e4b7e4302a9d39/transformed/media3-common-1.4.1/AndroidManifest.xml:22:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/cc824d6adfb359c804e781904a239b49/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:22:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/cc824d6adfb359c804e781904a239b49/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:22:5-79
 	android:name
 		ADDED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:6:22-76
 application
 ADDED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:8:5-31:19
 INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:8:5-31:19
+MERGED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/d4abcbd69790774a976c2bc3b1513bfd/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/d4abcbd69790774a976c2bc3b1513bfd/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/1cf234875fceeae89cfa877d342ae76a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/1cf234875fceeae89cfa877d342ae76a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
 	android:extractNativeLibs
 		INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
 	android:label
 		ADDED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:11:9-41
 	android:icon
@@ -77,7 +113,125 @@ INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintempla
 INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml
 MERGED from [androidx.databinding:viewbinding:8.13.0] /home/rootster/.gradle/caches/8.13/transforms/433455941a1460a5c83ee65b2382278d/transformed/viewbinding-8.13.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.databinding:viewbinding:8.13.0] /home/rootster/.gradle/caches/8.13/transforms/433455941a1460a5c83ee65b2382278d/transformed/viewbinding-8.13.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.media3:media3-ui:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0593744ef9cde04f6223968c758b0685/transformed/media3-ui-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-ui:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0593744ef9cde04f6223968c758b0685/transformed/media3-ui-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-extractor:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0a3a3a7bdc798189f5014bbf69f53f7d/transformed/media3-extractor-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-extractor:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0a3a3a7bdc798189f5014bbf69f53f7d/transformed/media3-extractor-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-container:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/f0acec949c4c7d8edbbfdd34a43cd9a2/transformed/media3-container-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-container:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/f0acec949c4c7d8edbbfdd34a43cd9a2/transformed/media3-container-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-datasource:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/1f5ddf6742b1bfa8cbb6b8883746a8ce/transformed/media3-datasource-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-datasource:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/1f5ddf6742b1bfa8cbb6b8883746a8ce/transformed/media3-datasource-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-decoder:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/9ece5e8f1310544ecb48e73717a6a039/transformed/media3-decoder-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-decoder:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/9ece5e8f1310544ecb48e73717a6a039/transformed/media3-decoder-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-database:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/74155c2a5ef708e150ddd07b31ba88c1/transformed/media3-database-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-database:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/74155c2a5ef708e150ddd07b31ba88c1/transformed/media3-database-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-common:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0ba1af4411e80b6531e4b7e4302a9d39/transformed/media3-common-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-common:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0ba1af4411e80b6531e4b7e4302a9d39/transformed/media3-common-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/cc824d6adfb359c804e781904a239b49/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/cc824d6adfb359c804e781904a239b49/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.7.0] /home/rootster/.gradle/caches/8.13/transforms/79f91400238beafb724d3fda37a03345/transformed/media-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.media:media:1.7.0] /home/rootster/.gradle/caches/8.13/transforms/79f91400238beafb724d3fda37a03345/transformed/media-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/rootster/.gradle/caches/8.13/transforms/a1166f2b5b8408f385d6092316e90c4c/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/rootster/.gradle/caches/8.13/transforms/a1166f2b5b8408f385d6092316e90c4c/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/rootster/.gradle/caches/8.13/transforms/c25c004d4be7a8e1181d3fbfcad89131/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/rootster/.gradle/caches/8.13/transforms/c25c004d4be7a8e1181d3fbfcad89131/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/da281c11d729a390f9b52865bb10e17a/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/da281c11d729a390f9b52865bb10e17a/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/rootster/.gradle/caches/8.13/transforms/224b800c1688334a890b1de02422e3bf/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/rootster/.gradle/caches/8.13/transforms/224b800c1688334a890b1de02422e3bf/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/rootster/.gradle/caches/8.13/transforms/2ebf9f65567791ba8234685d1319ff69/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/rootster/.gradle/caches/8.13/transforms/2ebf9f65567791ba8234685d1319ff69/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] /home/rootster/.gradle/caches/8.13/transforms/93d5a33325f581483096101957d121de/transformed/exifinterface-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] /home/rootster/.gradle/caches/8.13/transforms/93d5a33325f581483096101957d121de/transformed/exifinterface-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/rootster/.gradle/caches/8.13/transforms/7220e38c51242bb10a3327b27b380012/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/rootster/.gradle/caches/8.13/transforms/7220e38c51242bb10a3327b27b380012/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/d4abcbd69790774a976c2bc3b1513bfd/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/d4abcbd69790774a976c2bc3b1513bfd/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] /home/rootster/.gradle/caches/8.13/transforms/7a5290b2ae357e0174c549442ad22b71/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] /home/rootster/.gradle/caches/8.13/transforms/7a5290b2ae357e0174c549442ad22b71/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/1cf234875fceeae89cfa877d342ae76a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/1cf234875fceeae89cfa877d342ae76a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/rootster/.gradle/caches/8.13/transforms/760271c1be6ee8eb92cdcdda54cbec95/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/rootster/.gradle/caches/8.13/transforms/760271c1be6ee8eb92cdcdda54cbec95/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
 	android:targetSdkVersion
 		INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+permission#com.walaris.airscout.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+uses-permission#com.walaris.airscout.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /home/rootster/.gradle/caches/8.13/transforms/0436ae6a7e856e9e650f2bf3ed105031/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/d4abcbd69790774a976c2bc3b1513bfd/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rootster/.gradle/caches/8.13/transforms/d4abcbd69790774a976c2bc3b1513bfd/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:25:13-67
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/rootster/.gradle/caches/8.13/transforms/b00789bbb7cd2d0b03937ecaa55127df/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92

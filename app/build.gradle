@@ -295,6 +295,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
     implementation "com.squareup.okhttp3:okhttp:4.12.0"
+    implementation "androidx.media3:media3-exoplayer:1.4.1"
+    implementation "androidx.media3:media3-ui:1.4.1"
 }
 
 configurations.all {
@@ -313,7 +315,6 @@ configurations.all {
         
 configurations.implementation {
        exclude group: 'androidx.core', module: 'core-ktx'
-       exclude group: 'androidx.core', module: 'core'
        exclude group: 'androidx.fragment', module: 'fragment'
        exclude group: 'androidx.lifecycle', module: 'lifecycle'
        exclude group: 'androidx.lifecycle', module: 'lifecycle-process'
