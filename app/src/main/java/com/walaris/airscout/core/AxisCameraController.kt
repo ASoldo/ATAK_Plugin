@@ -2,6 +2,7 @@ package com.walaris.airscout.core
 
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -214,6 +215,10 @@ class AxisCameraController(context: Context) {
             targetView.player = player
             targetView.visibility = View.VISIBLE
             currentImageView?.visibility = View.GONE
+            targetView.setShowBuffering(PlayerView.SHOW_BUFFERING_NEVER)
+            targetView.useController = false
+            targetView.setDefaultArtwork(null)
+            targetView.setShutterBackgroundColor(Color.TRANSPARENT)
             val mediaItem = runCatching { Uri.parse(source) }
                 .map { MediaItem.fromUri(it) }
                 .getOrDefault(MediaItem.fromUri(source))

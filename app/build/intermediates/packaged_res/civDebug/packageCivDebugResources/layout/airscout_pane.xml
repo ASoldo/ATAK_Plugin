@@ -66,8 +66,10 @@
                 android:id="@+id/videoImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:background="#000000"
                 android:contentDescription="@string/status_selected_camera"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 android:visibility="gone" />
 
             <androidx.media3.ui.PlayerView
@@ -76,7 +78,9 @@
                 android:layout_height="match_parent"
                 android:background="#000000"
                 android:keepScreenOn="true"
-                app:resize_mode="fill"
+                app:resize_mode="fit"
+                app:show_buffering="never"
+                app:use_artwork="false"
                 app:surface_type="texture_view"
                 app:use_controller="false" />
 
