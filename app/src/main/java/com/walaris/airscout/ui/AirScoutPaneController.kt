@@ -382,11 +382,16 @@ class AirScoutPaneController(
     }
 
     private fun deleteResource(camera: AxisCamera) {
-        AlertDialog.Builder(context)
-            .setTitle(R.string.resource_delete_confirm_title)
-            .setMessage(context.getString(R.string.resource_delete_confirm_message, camera.displayName))
-            .setNegativeButton(R.string.resource_delete_confirm_negative, null)
-            .setPositiveButton(R.string.resource_delete_confirm_positive) { _, _ ->
+        val hostContext = runCatching { MapView.getMapView().context }.getOrNull()
+        val dialogContext = if (hostContext != null) ContextThemeWrapper(hostContext, R.style.ATAKPluginTheme) else ContextThemeWrapper(context, R.style.ATAKPluginTheme)
+        val titleText = context.getText(R.string.resource_delete_confirm_title)
+        val messageText = context.getString(R.string.resource_delete_confirm_message, camera.displayName)
+
+        AlertDialog.Builder(dialogContext)
+            .setTitle(titleText)
+            .setMessage(messageText)
+            .setNegativeButton(context.getText(R.string.resource_delete_confirm_negative), null)
+            .setPositiveButton(context.getText(R.string.resource_delete_confirm_positive)) { _, _ ->
                 cameraController.stopStream()
                 cameraController.closeEventChannel()
                 mapController.removeCamera(camera.uid)
