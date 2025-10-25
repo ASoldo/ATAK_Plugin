@@ -84,7 +84,7 @@ class AirScoutPaneController(
         ui.backButton.setOnClickListener { showList() }
     }
 
-    private fun showList() {
+    private fun showList(selectUid: String? = null) {
         val ui = binding ?: return
         if (contentMode == ContentMode.CONTROL) {
             stopStream()
@@ -92,10 +92,10 @@ class AirScoutPaneController(
         contentMode = ContentMode.LIST
         ui.contentSwitcher.displayedChild = ContentMode.LIST.ordinal
         ui.statusMessage.text = context.getString(R.string.status_no_cameras)
-        if (pendingSelectUid == null) {
-            currentCamera = null
-        }
-        resourceAdapter.setSelected(pendingSelectUid)
+        val selection = selectUid ?: pendingSelectUid
+        pendingSelectUid = selection
+        currentCamera = selection?.let { mapController.getCamera(it) }
+        resourceAdapter.setSelected(selection)
     }
 
     private fun showControl(camera: AxisCamera) {
@@ -486,18 +486,18 @@ class AirScoutPaneController(
     }
 
     override fun onResourceListRequested(targetCamera: AxisCamera?) {
-        showResourceCatalog(targetCamera)
+        // handled through plugin controller
     }
 
     override fun onCameraEditRequested(camera: AxisCamera) {
-        editCamera(camera)
+        // handled through plugin controller
     }
 
     fun showResourceCatalog(target: AxisCamera?) {
         binding?.root?.post {
             val targetUid = target?.uid
             pendingSelectUid = targetUid
-            showList()
+            showList(targetUid)
             refreshResourceList(targetUid)
         }
     }
@@ -505,7 +505,7 @@ class AirScoutPaneController(
     fun editCamera(camera: AxisCamera) {
         binding?.root?.post {
             pendingSelectUid = camera.uid
-            showList()
+            showList(camera.uid)
             refreshResourceList(camera.uid)
             promptResourceDialog(camera, null)
         }
