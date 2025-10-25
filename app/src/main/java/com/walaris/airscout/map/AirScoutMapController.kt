@@ -367,11 +367,43 @@ class AirScoutMapController(
         } else {
             shape.refresh(mapView.getMapEventDispatcher(), null, javaClass)
         }
+
+        val arrowId = "${camera.uid}-fovarrow"
+        val existingArrow = mapView.getMapItem(arrowId) as? DrawingShape
+        val arrowShape = existingArrow ?: DrawingShape(mapView, arrowId).apply {
+            setMetaBoolean("archive", false)
+            setMetaBoolean("editable", false)
+            setClosed(false)
+        }
+        val arrowBase = GeoPoint(center.latitude, center.longitude, altitude)
+        val arrowHead = GeoCalculations.pointAtDistance(center, bearing, range)
+        val arrowLeft = GeoCalculations.pointAtDistance(arrowHead, bearing + 150.0, range * 0.1)
+        val arrowRight = GeoCalculations.pointAtDistance(arrowHead, bearing - 150.0, range * 0.1)
+        arrowShape.setPoints(arrayOf(
+            arrowBase,
+            GeoPoint(arrowHead.latitude, arrowHead.longitude, altitude),
+            GeoPoint(arrowLeft.latitude, arrowLeft.longitude, altitude),
+            GeoPoint(arrowHead.latitude, arrowHead.longitude, altitude),
+            GeoPoint(arrowRight.latitude, arrowRight.longitude, altitude)
+        ))
+        arrowShape.setStrokeColor(FOV_STROKE_COLOR)
+        arrowShape.setStrokeWeight(2.5)
+        arrowShape.setFillColor(Color.TRANSPARENT)
+        arrowShape.setHeight(altitude)
+        arrowShape.setMetaString("parent_uid", camera.uid)
+        arrowShape.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        arrowShape.setTitle(context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        if (existingArrow == null) {
+            mapView.getRootGroup().addItem(arrowShape)
+        } else {
+            arrowShape.refresh(mapView.getMapEventDispatcher(), null, javaClass)
+        }
     }
 
     private fun clearFrustumOverlay(cameraId: String) {
         mapView.getMapItem("$cameraId-ring")?.removeFromGroup()
         mapView.getMapItem("$cameraId-fovshape")?.removeFromGroup()
+        mapView.getMapItem("$cameraId-fovarrow")?.removeFromGroup()
     }
 
     companion object {
