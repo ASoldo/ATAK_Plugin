@@ -8,8 +8,8 @@ public final class BuildConfig {
   public static final String APPLICATION_ID = "com.walaris.airscout";
   public static final String BUILD_TYPE = "debug";
   public static final String FLAVOR = "civ";
-  public static final int VERSION_CODE = 1761428944;
-  public static final String VERSION_NAME = "0.1 (9874c989) - [5.5.0]";
+  public static final int VERSION_CODE = 1761429768;
+  public static final String VERSION_NAME = "0.1 (04b8e390) - [5.5.0]";
   // Field from the variant API
   public static final String ATAK_PACKAGE_NAME = "com.atakmap.app.civ";
 }

@@ -2,13 +2,13 @@ package com.walaris.airscout.map
 
 import android.content.Context
 import android.graphics.Color
-import com.atakmap.android.cot.detail.SensorDetailHandler
+import com.atakmap.android.drawing.mapItems.DrawingShape
 import com.atakmap.android.maps.MapItem
 import com.atakmap.android.maps.MapView
 import com.atakmap.android.maps.Marker
 import com.atakmap.android.menu.MapMenuReceiver
-import com.atakmap.map.CameraController
 import com.atakmap.coremap.maps.assets.Icon
+import com.atakmap.coremap.maps.coords.GeoCalculations
 import com.atakmap.coremap.maps.coords.GeoPoint
 import com.atakmap.coremap.maps.coords.GeoPointMetaData
 import com.atakmap.android.video.ConnectionEntry
@@ -17,6 +17,7 @@ import com.walaris.airscout.R
 import com.walaris.airscout.core.AxisCamera
 import com.walaris.airscout.core.AxisCameraRepository
 import com.atakmap.android.util.Circle
+import com.atakmap.map.CameraController
 import java.util.concurrent.CopyOnWriteArraySet
 import kotlin.math.roundToInt
 
@@ -320,48 +321,65 @@ class AirScoutMapController(
 
     private fun createSensorFov(camera: AxisCamera, marker: Marker) {
         val range = camera.frustumRangeMeters?.takeIf { it > 0 } ?: return
-        val horizontalFov = (camera.frustumHorizontalFovDeg ?: DEFAULT_HORIZONTAL_FOV)
-            .roundToInt().coerceIn(1, 179).toDouble()
-        val verticalFov = (camera.frustumVerticalFovDeg ?: DEFAULT_VERTICAL_FOV)
-            .roundToInt().coerceIn(1, 179).toDouble()
+        val horizontalFov =
+            (camera.frustumHorizontalFovDeg ?: DEFAULT_HORIZONTAL_FOV).coerceIn(1.0, 179.0)
+        val verticalFov =
+            (camera.frustumVerticalFovDeg ?: DEFAULT_VERTICAL_FOV).coerceIn(1.0, 179.0)
+        val segments = (horizontalFov / 4).roundToInt().coerceIn(6, 36)
         val bearing = camera.frustumBearingDeg ?: 0.0
-        mapView.getMapItem("${marker.uid}-fov")?.removeFromGroup()
+        val center = marker.point
+        val altitude = center.altitude
+        val startAzimuth = bearing - horizontalFov / 2.0
+        val endAzimuth = bearing + horizontalFov / 2.0
         marker.setTrack(bearing, 0.0)
-        val color = floatArrayOf(
-            Color.red(FOV_COLOR) / 255f,
-            Color.green(FOV_COLOR) / 255f,
-            Color.blue(FOV_COLOR) / 255f,
-            FOV_ALPHA
-        )
-        val sensorFov = SensorDetailHandler.addFovToMap(
-            marker,
-            bearing,
-            horizontalFov,
-            range.coerceAtLeast(1.0),
-            color,
-            true
-        )
-        (sensorFov ?: mapView.getMapItem("${marker.uid}-fov") as? MapItem)?.let { fov ->
-            fov.setMetaString("parent_uid", camera.uid)
-            fov.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
-            fov.setMetaDouble(SensorDetailHandler.AZIMUTH_ATTRIBUTE, bearing)
-            fov.setMetaDouble(SensorDetailHandler.FOV_ATTRIBUTE, horizontalFov)
-            fov.setMetaDouble(SensorDetailHandler.VFOV_ATTRIBUTE, verticalFov)
-            fov.setMetaDouble(SensorDetailHandler.RANGE_ATTRIBUTE, range.coerceAtLeast(1.0))
+
+        val points = ArrayList<GeoPoint>(segments + 3)
+        points += GeoPoint(center.latitude, center.longitude, altitude)
+        for (i in 0..segments) {
+            val t = i.toDouble() / segments.toDouble()
+            val azimuth = startAzimuth + (endAzimuth - startAzimuth) * t
+            val target = GeoCalculations.pointAtDistance(center, azimuth, range)
+            points += GeoPoint(target.latitude, target.longitude, altitude)
+        }
+        points += GeoPoint(center.latitude, center.longitude, altitude)
+
+        val shapeId = "${camera.uid}-fovshape"
+        val existingShape = mapView.getMapItem(shapeId) as? DrawingShape
+        val shape = existingShape ?: DrawingShape(mapView, shapeId).apply {
+            setMetaBoolean("archive", false)
+            setMetaBoolean("editable", false)
+            setClosed(true)
+        }
+        shape.setPoints(points.toTypedArray())
+        shape.setStrokeColor(FOV_STROKE_COLOR)
+        shape.setStrokeWeight(2.5)
+        shape.setFillColor(FOV_FILL_COLOR)
+        shape.setHeight(altitude)
+        shape.setMetaString("parent_uid", camera.uid)
+        shape.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        shape.setMetaDouble("bearing", bearing)
+        shape.setMetaDouble("hfov", horizontalFov)
+        shape.setMetaDouble("vfov", verticalFov)
+        shape.setMetaDouble("range", range)
+        shape.setTitle(context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        if (existingShape == null) {
+            mapView.getRootGroup().addItem(shape)
+        } else {
+            shape.refresh(mapView.getMapEventDispatcher(), null, javaClass)
         }
     }
 
     private fun clearFrustumOverlay(cameraId: String) {
         mapView.getMapItem("$cameraId-ring")?.removeFromGroup()
-        mapView.getMapItem("$cameraId-fov")?.removeFromGroup()
+        mapView.getMapItem("$cameraId-fovshape")?.removeFromGroup()
     }
 
     companion object {
         const val CAMERA_MARKER_TYPE = "b-walaris-airscout"
         private val CIRCLE_STROKE_COLOR = Color.parseColor("#FF4B6EA8")
         private val CIRCLE_FILL_COLOR = Color.parseColor("#334B6EA8")
-        private val FOV_COLOR = Color.parseColor("#FFC1D034")
-        private const val FOV_ALPHA = 0.45f
+        private val FOV_STROKE_COLOR = Color.parseColor("#FFC1D034")
+        private val FOV_FILL_COLOR = Color.parseColor("#33C1D034")
         private const val DEFAULT_HORIZONTAL_FOV = 60.0
         private const val DEFAULT_VERTICAL_FOV = 45.0
     }
