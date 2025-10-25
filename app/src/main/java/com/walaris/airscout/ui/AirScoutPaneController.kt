@@ -85,7 +85,7 @@ class AirScoutPaneController(
         val camera = currentCamera ?: return
         val ui = binding ?: return
         cameraController.closeEventChannel()
-        cameraController.startStream(ui.videoPlayerView, camera) { error ->
+        cameraController.startStream(ui.videoPlayerView, ui.videoImageView, camera) { error ->
             updateStatus(context.getString(R.string.status_stream_error, error.localizedMessage ?: ""))
         }
         cameraController.connectEventChannel(camera) { }

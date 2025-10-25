@@ -62,6 +62,14 @@
             android:background="#0DFFFFFF"
             android:foregroundGravity="center">
 
+            <ImageView
+                android:id="@+id/videoImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/status_selected_camera"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
             <androidx.media3.ui.PlayerView
                 android:id="@+id/videoPlayerView"
                 android:layout_width="match_parent"

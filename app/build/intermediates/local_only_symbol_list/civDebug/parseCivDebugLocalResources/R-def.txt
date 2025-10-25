@@ -22,6 +22,7 @@ id overlayRemove
 id removeCameraButton
 id selectedFeedLabel
 id statusMessage
+id videoImageView
 id videoPlayerView
 layout airscout_pane
 layout overlay_airscout_camera_actions

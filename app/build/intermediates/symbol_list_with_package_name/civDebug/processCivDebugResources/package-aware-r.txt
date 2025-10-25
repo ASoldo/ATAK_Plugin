@@ -435,6 +435,7 @@ id text2
 id texture_view
 id time
 id title
+id videoImageView
 id videoPlayerView
 id video_decoder_gl_surface_view
 id view_tree_lifecycle_owner

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,18 +39,22 @@ public final class AirscoutPaneBinding implements ViewBinding {
   public final TextView statusMessage;
 
   @NonNull
+  public final ImageView videoImageView;
+
+  @NonNull
   public final PlayerView videoPlayerView;
 
   private AirscoutPaneBinding(@NonNull FrameLayout rootView, @NonNull Button addCameraButton,
       @NonNull DualJoystickView joystickOverlay, @NonNull Button removeCameraButton,
       @NonNull TextView selectedFeedLabel, @NonNull TextView statusMessage,
-      @NonNull PlayerView videoPlayerView) {
+      @NonNull ImageView videoImageView, @NonNull PlayerView videoPlayerView) {
     this.rootView = rootView;
     this.addCameraButton = addCameraButton;
     this.joystickOverlay = joystickOverlay;
     this.removeCameraButton = removeCameraButton;
     this.selectedFeedLabel = selectedFeedLabel;
     this.statusMessage = statusMessage;
+    this.videoImageView = videoImageView;
     this.videoPlayerView = videoPlayerView;
   }
 
@@ -110,6 +115,12 @@ public final class AirscoutPaneBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.videoImageView;
+      ImageView videoImageView = ViewBindings.findChildViewById(rootView, id);
+      if (videoImageView == null) {
+        break missingId;
+      }
+
       id = R.id.videoPlayerView;
       PlayerView videoPlayerView = ViewBindings.findChildViewById(rootView, id);
       if (videoPlayerView == null) {
@@ -117,7 +128,7 @@ public final class AirscoutPaneBinding implements ViewBinding {
       }
 
       return new AirscoutPaneBinding((FrameLayout) rootView, addCameraButton, joystickOverlay,
-          removeCameraButton, selectedFeedLabel, statusMessage, videoPlayerView);
+          removeCameraButton, selectedFeedLabel, statusMessage, videoImageView, videoPlayerView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

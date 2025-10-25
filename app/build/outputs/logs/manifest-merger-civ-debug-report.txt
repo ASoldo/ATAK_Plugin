@@ -19,6 +19,7 @@ MERGED from [androidx.media3:media3-datasource:1.4.1] /home/rootster/.gradle/cac
 MERGED from [androidx.media3:media3-decoder:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/9ece5e8f1310544ecb48e73717a6a039/transformed/media3-decoder-1.4.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.media3:media3-database:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/74155c2a5ef708e150ddd07b31ba88c1/transformed/media3-database-1.4.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.media3:media3-common:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0ba1af4411e80b6531e4b7e4302a9d39/transformed/media3-common-1.4.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-exoplayer-rtsp:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/6012c53e78c36e97facf01773432405c/transformed/media3-exoplayer-rtsp-1.4.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.media3:media3-exoplayer:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/cc824d6adfb359c804e781904a239b49/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.media:media:1.7.0] /home/rootster/.gradle/caches/8.13/transforms/79f91400238beafb724d3fda37a03345/transformed/media-1.7.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/rootster/.gradle/caches/8.13/transforms/a1166f2b5b8408f385d6092316e90c4c/transformed/recyclerview-1.3.0/AndroidManifest.xml:17:1-22:12
@@ -127,6 +128,8 @@ MERGED from [androidx.media3:media3-database:1.4.1] /home/rootster/.gradle/cache
 MERGED from [androidx.media3:media3-database:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/74155c2a5ef708e150ddd07b31ba88c1/transformed/media3-database-1.4.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.media3:media3-common:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0ba1af4411e80b6531e4b7e4302a9d39/transformed/media3-common-1.4.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.media3:media3-common:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/0ba1af4411e80b6531e4b7e4302a9d39/transformed/media3-common-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-rtsp:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/6012c53e78c36e97facf01773432405c/transformed/media3-exoplayer-rtsp-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-rtsp:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/6012c53e78c36e97facf01773432405c/transformed/media3-exoplayer-rtsp-1.4.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.media3:media3-exoplayer:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/cc824d6adfb359c804e781904a239b49/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.media3:media3-exoplayer:1.4.1] /home/rootster/.gradle/caches/8.13/transforms/cc824d6adfb359c804e781904a239b49/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.media:media:1.7.0] /home/rootster/.gradle/caches/8.13/transforms/79f91400238beafb724d3fda37a03345/transformed/media-1.7.0/AndroidManifest.xml:5:5-44
