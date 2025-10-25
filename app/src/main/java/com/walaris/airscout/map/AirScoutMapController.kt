@@ -1,18 +1,24 @@
 package com.walaris.airscout.map
 
 import android.content.Context
+import android.graphics.Color
+import com.atakmap.android.cot.detail.SensorDetailHandler
+import com.atakmap.android.maps.MapItem
 import com.atakmap.android.maps.MapView
 import com.atakmap.android.maps.Marker
 import com.atakmap.android.menu.MapMenuReceiver
 import com.atakmap.map.CameraController
 import com.atakmap.coremap.maps.assets.Icon
 import com.atakmap.coremap.maps.coords.GeoPoint
+import com.atakmap.coremap.maps.coords.GeoPointMetaData
 import com.atakmap.android.video.ConnectionEntry
 import com.atakmap.android.video.manager.VideoManager
 import com.walaris.airscout.R
 import com.walaris.airscout.core.AxisCamera
 import com.walaris.airscout.core.AxisCameraRepository
+import com.atakmap.android.util.Circle
 import java.util.concurrent.CopyOnWriteArraySet
+import kotlin.math.roundToInt
 
 class AirScoutMapController(
     private val context: Context,
@@ -24,6 +30,7 @@ class AirScoutMapController(
         fun onCameraPreviewRequested(camera: AxisCamera)
         fun onAddCameraRequested(initialLocation: GeoPoint?)
         fun onCameraRemoved(camera: AxisCamera)
+        fun onCameraInventoryChanged()
     }
 
     private val listeners = CopyOnWriteArraySet<Listener>()
@@ -45,6 +52,7 @@ class AirScoutMapController(
     fun stop() {
         mapView.post {
             MapMenuReceiver.getInstance().unregisterMapMenuFactory(menuFactory)
+            cameras.keys.toList().forEach { clearFrustumOverlay(it) }
             markers.values.forEach { marker ->
                 mapView.getRootGroup().removeItem(marker)
             }
@@ -73,6 +81,7 @@ class AirScoutMapController(
     fun removeCamera(uid: String) {
         val camera = cameras[uid] ?: return
         mapView.post {
+            clearFrustumOverlay(uid)
             val marker = markers.remove(uid)
             if (marker != null) {
                 mapView.getRootGroup().removeItem(marker)
@@ -81,11 +90,23 @@ class AirScoutMapController(
             cameras.remove(uid)
             repository.delete(uid)
             listeners.forEach { it.onCameraRemoved(camera) }
+            listeners.forEach { it.onCameraInventoryChanged() }
         }
     }
 
-    fun selectCamera(uid: String) {
+    fun selectCamera(uid: String, centerOnMap: Boolean = false) {
         val camera = cameras[uid] ?: return
+        if (centerOnMap) {
+            markers[uid]?.let { marker ->
+                mapView.post {
+                    CameraController.Programmatic.panTo(
+                        mapView.renderer3,
+                        marker.point,
+                        true
+                    )
+                }
+            }
+        }
         listeners.forEach { it.onCameraSelected(camera) }
     }
 
@@ -100,7 +121,9 @@ class AirScoutMapController(
             val marker = createMarker(copy)
             markers[copy.uid] = marker
             mapView.getRootGroup().addItem(marker)
+            refreshFrustumOverlay(copy, marker)
             overlay.onMarkerAdded(CameraMapEntry(copy, marker))
+            listeners.forEach { it.onCameraInventoryChanged() }
         } else {
             existing.updateFrom(camera)
             if (persist) {
@@ -114,8 +137,10 @@ class AirScoutMapController(
                 existing.protocol?.let { marker.setMetaString("protocol", it) }
                 marker.setPoint(GeoPoint(existing.latitude, existing.longitude, existing.altitude))
                 marker.refresh(mapView.getMapEventDispatcher(), null, javaClass)
+                refreshFrustumOverlay(existing, marker)
                 overlay.onMarkerAdded(CameraMapEntry(existing.copy(), marker))
             }
+            listeners.forEach { it.onCameraInventoryChanged() }
         }
     }
 
@@ -149,9 +174,9 @@ class AirScoutMapController(
     }
 
     override fun onPreviewCameraRequested(cameraId: String) {
-        cameras[cameraId]?.let { camera ->
-            listeners.forEach { it.onCameraPreviewRequested(camera) }
-        }
+        val camera = cameras[cameraId] ?: return
+        selectCamera(cameraId, centerOnMap = true)
+        listeners.forEach { it.onCameraPreviewRequested(camera) }
     }
 
     override fun onRemoveCameraRequested(cameraId: String) {
@@ -191,6 +216,7 @@ class AirScoutMapController(
             val camera = AxisCamera(
                 uid = sourceId,
                 displayName = alias,
+                description = existing?.description ?: "",
                 latitude = latitude,
                 longitude = longitude,
                 altitude = altitude,
@@ -199,7 +225,13 @@ class AirScoutMapController(
                 eventWebSocketUrl = existing?.eventWebSocketUrl,
                 username = existing?.username,
                 password = existing?.password,
-                protocol = entry.protocol?.name ?: existing?.protocol
+                protocol = entry.protocol?.name ?: existing?.protocol,
+                frustumMode = existing?.frustumMode ?: AxisCamera.FrustumMode.CIRCLE,
+                frustumRangeMeters = existing?.frustumRangeMeters,
+                frustumHorizontalFovDeg = existing?.frustumHorizontalFovDeg,
+                frustumVerticalFovDeg = existing?.frustumVerticalFovDeg,
+                frustumRadiusMeters = existing?.frustumRadiusMeters,
+                frustumBearingDeg = existing?.frustumBearingDeg
             )
             addOrUpdateCameraInternal(camera, persist = true)
             added += sourceId
@@ -261,7 +293,72 @@ class AirScoutMapController(
         return Triple(point.latitude, point.longitude, point.altitude)
     }
 
+    private fun refreshFrustumOverlay(camera: AxisCamera, marker: Marker) {
+        clearFrustumOverlay(camera.uid)
+        when (camera.frustumMode) {
+            AxisCamera.FrustumMode.CIRCLE -> createCoverageRing(camera, marker)
+            AxisCamera.FrustumMode.CONE -> createSensorFov(camera, marker)
+        }
+    }
+
+    private fun createCoverageRing(camera: AxisCamera, marker: Marker) {
+        val radius = (camera.frustumRadiusMeters ?: camera.frustumRangeMeters)?.takeIf { it > 0 } ?: return
+        val circleId = "${camera.uid}-ring"
+        mapView.getMapItem(circleId)?.removeFromGroup()
+        val circle = Circle(GeoPointMetaData.wrap(marker.point), radius, circleId)
+        circle.setTitle(context.getString(R.string.overlay_camera_ring_title, camera.displayName))
+        circle.setMetaString("parent_uid", camera.uid)
+        circle.setMetaString("callsign", circle.title)
+        circle.setColor(CIRCLE_STROKE_COLOR)
+        circle.setStrokeColor(CIRCLE_STROKE_COLOR)
+        circle.setStrokeWeight(2.5)
+        circle.setFillColor(CIRCLE_FILL_COLOR)
+        circle.setMetaBoolean("labels_on", false)
+        circle.setHeight(marker.point.altitude)
+        mapView.getRootGroup().addItem(circle)
+    }
+
+    private fun createSensorFov(camera: AxisCamera, marker: Marker) {
+        val range = camera.frustumRangeMeters?.takeIf { it > 0 } ?: return
+        val horizontalFov = (camera.frustumHorizontalFovDeg ?: DEFAULT_HORIZONTAL_FOV)
+            .roundToInt().coerceIn(1, 179)
+        val verticalFov = (camera.frustumVerticalFovDeg ?: DEFAULT_VERTICAL_FOV)
+            .roundToInt().coerceIn(1, 179)
+        val bearing = camera.frustumBearingDeg ?: 0.0
+        mapView.getMapItem("${marker.uid}-fov")?.removeFromGroup()
+        marker.setTrack(bearing, 0.0)
+        val color = floatArrayOf(
+            Color.red(FOV_COLOR) / 255f,
+            Color.green(FOV_COLOR) / 255f,
+            Color.blue(FOV_COLOR) / 255f,
+            FOV_OPACITY_DEG
+        )
+        SensorDetailHandler.addFovToMap(
+            marker,
+            horizontalFov.toDouble(),
+            verticalFov.toDouble(),
+            range.coerceAtLeast(1.0),
+            color,
+            true
+        )
+        (mapView.getMapItem("${marker.uid}-fov") as? MapItem)?.let { fov ->
+            fov.setMetaString("parent_uid", camera.uid)
+            fov.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        }
+    }
+
+    private fun clearFrustumOverlay(cameraId: String) {
+        mapView.getMapItem("$cameraId-ring")?.removeFromGroup()
+        mapView.getMapItem("$cameraId-fov")?.removeFromGroup()
+    }
+
     companion object {
         const val CAMERA_MARKER_TYPE = "b-walaris-airscout"
+        private val CIRCLE_STROKE_COLOR = Color.parseColor("#FF4B6EA8")
+        private val CIRCLE_FILL_COLOR = Color.parseColor("#334B6EA8")
+        private val FOV_COLOR = Color.parseColor("#FFC1D034")
+        private const val FOV_OPACITY_DEG = 90f
+        private const val DEFAULT_HORIZONTAL_FOV = 60.0
+        private const val DEFAULT_VERTICAL_FOV = 45.0
     }
 }

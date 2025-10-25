@@ -4,13 +4,16 @@ package com.walaris.airscout.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ViewAnimator;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.media3.ui.PlayerView;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.walaris.airscout.R;
@@ -24,13 +27,58 @@ public final class AirscoutPaneBinding implements ViewBinding {
   private final FrameLayout rootView;
 
   @NonNull
-  public final Button addCameraButton;
+  public final ImageButton addResourceButton;
+
+  @NonNull
+  public final ImageButton backButton;
+
+  @NonNull
+  public final ViewAnimator contentSwitcher;
+
+  @NonNull
+  public final LinearLayout controlContainer;
+
+  @NonNull
+  public final TextView controlControlInfo;
+
+  @NonNull
+  public final TextView controlFrustumInfo;
+
+  @NonNull
+  public final LinearLayout controlHeader;
+
+  @NonNull
+  public final LinearLayout controlInfoContainer;
+
+  @NonNull
+  public final TextView controlLocationInfo;
+
+  @NonNull
+  public final TextView controlStreamInfo;
+
+  @NonNull
+  public final TextView controlSubtitle;
+
+  @NonNull
+  public final TextView controlTitle;
+
+  @NonNull
+  public final TextView emptyMessage;
 
   @NonNull
   public final DualJoystickView joystickOverlay;
 
   @NonNull
-  public final Button removeCameraButton;
+  public final LinearLayout resourceListContainer;
+
+  @NonNull
+  public final TextView resourceListSummary;
+
+  @NonNull
+  public final TextView resourceListTitle;
+
+  @NonNull
+  public final RecyclerView resourceRecyclerView;
 
   @NonNull
   public final TextView statusMessage;
@@ -41,14 +89,36 @@ public final class AirscoutPaneBinding implements ViewBinding {
   @NonNull
   public final PlayerView videoPlayerView;
 
-  private AirscoutPaneBinding(@NonNull FrameLayout rootView, @NonNull Button addCameraButton,
-      @NonNull DualJoystickView joystickOverlay, @NonNull Button removeCameraButton,
-      @NonNull TextView statusMessage, @NonNull ImageView videoImageView,
-      @NonNull PlayerView videoPlayerView) {
+  private AirscoutPaneBinding(@NonNull FrameLayout rootView, @NonNull ImageButton addResourceButton,
+      @NonNull ImageButton backButton, @NonNull ViewAnimator contentSwitcher,
+      @NonNull LinearLayout controlContainer, @NonNull TextView controlControlInfo,
+      @NonNull TextView controlFrustumInfo, @NonNull LinearLayout controlHeader,
+      @NonNull LinearLayout controlInfoContainer, @NonNull TextView controlLocationInfo,
+      @NonNull TextView controlStreamInfo, @NonNull TextView controlSubtitle,
+      @NonNull TextView controlTitle, @NonNull TextView emptyMessage,
+      @NonNull DualJoystickView joystickOverlay, @NonNull LinearLayout resourceListContainer,
+      @NonNull TextView resourceListSummary, @NonNull TextView resourceListTitle,
+      @NonNull RecyclerView resourceRecyclerView, @NonNull TextView statusMessage,
+      @NonNull ImageView videoImageView, @NonNull PlayerView videoPlayerView) {
     this.rootView = rootView;
-    this.addCameraButton = addCameraButton;
+    this.addResourceButton = addResourceButton;
+    this.backButton = backButton;
+    this.contentSwitcher = contentSwitcher;
+    this.controlContainer = controlContainer;
+    this.controlControlInfo = controlControlInfo;
+    this.controlFrustumInfo = controlFrustumInfo;
+    this.controlHeader = controlHeader;
+    this.controlInfoContainer = controlInfoContainer;
+    this.controlLocationInfo = controlLocationInfo;
+    this.controlStreamInfo = controlStreamInfo;
+    this.controlSubtitle = controlSubtitle;
+    this.controlTitle = controlTitle;
+    this.emptyMessage = emptyMessage;
     this.joystickOverlay = joystickOverlay;
-    this.removeCameraButton = removeCameraButton;
+    this.resourceListContainer = resourceListContainer;
+    this.resourceListSummary = resourceListSummary;
+    this.resourceListTitle = resourceListTitle;
+    this.resourceRecyclerView = resourceRecyclerView;
     this.statusMessage = statusMessage;
     this.videoImageView = videoImageView;
     this.videoPlayerView = videoPlayerView;
@@ -81,9 +151,81 @@ public final class AirscoutPaneBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.addCameraButton;
-      Button addCameraButton = ViewBindings.findChildViewById(rootView, id);
-      if (addCameraButton == null) {
+      id = R.id.addResourceButton;
+      ImageButton addResourceButton = ViewBindings.findChildViewById(rootView, id);
+      if (addResourceButton == null) {
+        break missingId;
+      }
+
+      id = R.id.backButton;
+      ImageButton backButton = ViewBindings.findChildViewById(rootView, id);
+      if (backButton == null) {
+        break missingId;
+      }
+
+      id = R.id.contentSwitcher;
+      ViewAnimator contentSwitcher = ViewBindings.findChildViewById(rootView, id);
+      if (contentSwitcher == null) {
+        break missingId;
+      }
+
+      id = R.id.controlContainer;
+      LinearLayout controlContainer = ViewBindings.findChildViewById(rootView, id);
+      if (controlContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.controlControlInfo;
+      TextView controlControlInfo = ViewBindings.findChildViewById(rootView, id);
+      if (controlControlInfo == null) {
+        break missingId;
+      }
+
+      id = R.id.controlFrustumInfo;
+      TextView controlFrustumInfo = ViewBindings.findChildViewById(rootView, id);
+      if (controlFrustumInfo == null) {
+        break missingId;
+      }
+
+      id = R.id.controlHeader;
+      LinearLayout controlHeader = ViewBindings.findChildViewById(rootView, id);
+      if (controlHeader == null) {
+        break missingId;
+      }
+
+      id = R.id.controlInfoContainer;
+      LinearLayout controlInfoContainer = ViewBindings.findChildViewById(rootView, id);
+      if (controlInfoContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.controlLocationInfo;
+      TextView controlLocationInfo = ViewBindings.findChildViewById(rootView, id);
+      if (controlLocationInfo == null) {
+        break missingId;
+      }
+
+      id = R.id.controlStreamInfo;
+      TextView controlStreamInfo = ViewBindings.findChildViewById(rootView, id);
+      if (controlStreamInfo == null) {
+        break missingId;
+      }
+
+      id = R.id.controlSubtitle;
+      TextView controlSubtitle = ViewBindings.findChildViewById(rootView, id);
+      if (controlSubtitle == null) {
+        break missingId;
+      }
+
+      id = R.id.controlTitle;
+      TextView controlTitle = ViewBindings.findChildViewById(rootView, id);
+      if (controlTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.emptyMessage;
+      TextView emptyMessage = ViewBindings.findChildViewById(rootView, id);
+      if (emptyMessage == null) {
         break missingId;
       }
 
@@ -93,9 +235,27 @@ public final class AirscoutPaneBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.removeCameraButton;
-      Button removeCameraButton = ViewBindings.findChildViewById(rootView, id);
-      if (removeCameraButton == null) {
+      id = R.id.resourceListContainer;
+      LinearLayout resourceListContainer = ViewBindings.findChildViewById(rootView, id);
+      if (resourceListContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.resourceListSummary;
+      TextView resourceListSummary = ViewBindings.findChildViewById(rootView, id);
+      if (resourceListSummary == null) {
+        break missingId;
+      }
+
+      id = R.id.resourceListTitle;
+      TextView resourceListTitle = ViewBindings.findChildViewById(rootView, id);
+      if (resourceListTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.resourceRecyclerView;
+      RecyclerView resourceRecyclerView = ViewBindings.findChildViewById(rootView, id);
+      if (resourceRecyclerView == null) {
         break missingId;
       }
 
@@ -117,8 +277,11 @@ public final class AirscoutPaneBinding implements ViewBinding {
         break missingId;
       }
 
-      return new AirscoutPaneBinding((FrameLayout) rootView, addCameraButton, joystickOverlay,
-          removeCameraButton, statusMessage, videoImageView, videoPlayerView);
+      return new AirscoutPaneBinding((FrameLayout) rootView, addResourceButton, backButton,
+          contentSwitcher, controlContainer, controlControlInfo, controlFrustumInfo, controlHeader,
+          controlInfoContainer, controlLocationInfo, controlStreamInfo, controlSubtitle,
+          controlTitle, emptyMessage, joystickOverlay, resourceListContainer, resourceListSummary,
+          resourceListTitle, resourceRecyclerView, statusMessage, videoImageView, videoPlayerView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

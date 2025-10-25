@@ -241,8 +241,25 @@ class AirScoutCameraOverlay(
 
         override fun getTitle(): String = entry.camera.displayName
 
-        override fun getDescription(): String =
-            context.getString(R.string.overlay_camera_description, entry.camera.rtspUrl)
+        override fun getDescription(): String {
+            val camera = entry.camera
+            val parts = mutableListOf<String>()
+            if (camera.description.isNotBlank()) {
+                parts += camera.description
+            }
+            if (camera.rtspUrl.isNotBlank()) {
+                parts += context.getString(R.string.overlay_camera_description_stream, camera.rtspUrl)
+            }
+            if (camera.controlUrl.isNotBlank()) {
+                parts += context.getString(R.string.overlay_camera_description_control, camera.controlUrl)
+            }
+            parts += context.getString(
+                R.string.overlay_camera_description_location,
+                camera.latitude,
+                camera.longitude
+            )
+            return parts.joinToString("\n")
+        }
 
         override fun getIconUri(): String =
             "android.resource://${context.packageName}/${R.drawable.ic_plugin_badge_camera}"

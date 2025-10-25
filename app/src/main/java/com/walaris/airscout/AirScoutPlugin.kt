@@ -120,4 +120,8 @@ class AirScoutPlugin(
     override fun onCameraRemoved(camera: AxisCamera) {
         // no-op - pane controller reacts to map callback
     }
+
+    override fun onCameraInventoryChanged() {
+        // no-op
+    }
 }
