@@ -20,7 +20,6 @@ id overlayAddCamera
 id overlayPreview
 id overlayRemove
 id removeCameraButton
-id selectedFeedLabel
 id statusMessage
 id videoImageView
 id videoPlayerView

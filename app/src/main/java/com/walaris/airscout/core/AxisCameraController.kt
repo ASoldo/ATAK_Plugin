@@ -1,3 +1,5 @@
+@file:OptIn(androidx.media3.common.util.UnstableApi::class)
+
 package com.walaris.airscout.core
 
 import android.content.Context
@@ -171,10 +173,17 @@ class AxisCameraController(context: Context) {
         if (protocol == "mjpeg" || protocol == "mjpg") {
             return true
         }
-        return lower.endsWith(".mjpg") ||
-            lower.endsWith(".mjpeg") ||
-            lower.contains("mjpg") ||
-            lower.contains("mjpeg")
+        if (lower.endsWith(".mjpg") || lower.endsWith(".mjpeg")) {
+            return true
+        }
+        // Prefer explicit protocol hints over fuzzy substring matches to avoid
+        // misclassifying HLS/DASH URLs that happen to include "mjpg" in query params.
+        if (protocol != null && protocol !in setOf("http", "https")) {
+            return false
+        }
+        // Heuristic: treat as MJPEG only when the path explicitly contains a mjpeg token.
+        val pathSegment = lower.substringBefore('?', lower)
+        return pathSegment.contains("/mjpg") || pathSegment.contains("/mjpeg")
     }
 
     private fun startMjpegStream(

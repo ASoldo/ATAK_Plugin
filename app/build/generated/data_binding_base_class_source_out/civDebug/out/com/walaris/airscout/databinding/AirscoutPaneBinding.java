@@ -33,9 +33,6 @@ public final class AirscoutPaneBinding implements ViewBinding {
   public final Button removeCameraButton;
 
   @NonNull
-  public final TextView selectedFeedLabel;
-
-  @NonNull
   public final TextView statusMessage;
 
   @NonNull
@@ -46,13 +43,12 @@ public final class AirscoutPaneBinding implements ViewBinding {
 
   private AirscoutPaneBinding(@NonNull FrameLayout rootView, @NonNull Button addCameraButton,
       @NonNull DualJoystickView joystickOverlay, @NonNull Button removeCameraButton,
-      @NonNull TextView selectedFeedLabel, @NonNull TextView statusMessage,
-      @NonNull ImageView videoImageView, @NonNull PlayerView videoPlayerView) {
+      @NonNull TextView statusMessage, @NonNull ImageView videoImageView,
+      @NonNull PlayerView videoPlayerView) {
     this.rootView = rootView;
     this.addCameraButton = addCameraButton;
     this.joystickOverlay = joystickOverlay;
     this.removeCameraButton = removeCameraButton;
-    this.selectedFeedLabel = selectedFeedLabel;
     this.statusMessage = statusMessage;
     this.videoImageView = videoImageView;
     this.videoPlayerView = videoPlayerView;
@@ -103,12 +99,6 @@ public final class AirscoutPaneBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.selectedFeedLabel;
-      TextView selectedFeedLabel = ViewBindings.findChildViewById(rootView, id);
-      if (selectedFeedLabel == null) {
-        break missingId;
-      }
-
       id = R.id.statusMessage;
       TextView statusMessage = ViewBindings.findChildViewById(rootView, id);
       if (statusMessage == null) {
@@ -128,7 +118,7 @@ public final class AirscoutPaneBinding implements ViewBinding {
       }
 
       return new AirscoutPaneBinding((FrameLayout) rootView, addCameraButton, joystickOverlay,
-          removeCameraButton, selectedFeedLabel, statusMessage, videoImageView, videoPlayerView);
+          removeCameraButton, statusMessage, videoImageView, videoPlayerView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

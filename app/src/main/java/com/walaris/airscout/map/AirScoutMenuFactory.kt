@@ -78,8 +78,8 @@ class AirScoutMenuFactory(
         val mapDataRef = MapDataRef.parseUri(uri)
         return WidgetIcon.Builder()
             .setImageRef(0, mapDataRef)
-            .setAnchor(24, 24)
-            .setSize(48, 48)
+            .setAnchor(16, 16)
+            .setSize(32, 32)
             .build()
     }
 

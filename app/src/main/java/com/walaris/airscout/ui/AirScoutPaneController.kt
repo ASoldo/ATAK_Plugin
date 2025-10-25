@@ -64,7 +64,6 @@ class AirScoutPaneController(
 
         if (cameras.isEmpty()) {
             currentCamera = null
-            binding?.selectedFeedLabel?.text = context.getString(R.string.status_no_cameras)
             binding?.statusMessage?.setText(R.string.status_no_cameras)
             cameraController.stopStream()
             cameraController.closeEventChannel()
@@ -76,7 +75,6 @@ class AirScoutPaneController(
             ?: cameras.first()
 
         currentCamera = selectedCamera
-        binding?.selectedFeedLabel?.text = selectedCamera.displayName
         updateStatus(context.getString(R.string.status_selected_camera, selectedCamera.displayName))
         startStreamIfReady()
     }
@@ -93,7 +91,6 @@ class AirScoutPaneController(
 
     private fun updateStatus(message: String) {
         binding?.statusMessage?.text = message
-        binding?.selectedFeedLabel?.text = currentCamera?.displayName ?: context.getString(R.string.status_no_cameras)
     }
 
     private fun openVideoPicker(initialLocation: GeoPoint?) {

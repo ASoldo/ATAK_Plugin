@@ -411,7 +411,6 @@ int id pooling_container_listener_holder_tag 0x7f070081
 int id removeCameraButton 0x7f070082
 int id right_icon 0x7f070083
 int id right_side 0x7f070084
-int id selectedFeedLabel 0x7f070085
 int id spherical_gl_surface_view 0x7f070086
 int id statusMessage 0x7f070087
 int id status_bar_latest_event_content 0x7f070088

@@ -412,7 +412,6 @@ id pooling_container_listener_holder_tag
 id removeCameraButton
 id right_icon
 id right_side
-id selectedFeedLabel
 id spherical_gl_surface_view
 id statusMessage
 id status_bar_latest_event_content
