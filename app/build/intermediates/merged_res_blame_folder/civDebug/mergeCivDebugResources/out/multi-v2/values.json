@@ -1,0 +1,96 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.atakmap.android.plugintemplate.plugin.app-mergeCivDebugResources-3:/values/values.xml",
+            "map": [
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/build/generated/res/resValues/civ/debug/values/gradleResValues.xml",
+                    "from": {
+                        "startLines": "6",
+                        "startColumns": "4",
+                        "startOffsets": "150",
+                        "endColumns": "77",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "9",
+                        "startColumns": "4",
+                        "startOffsets": "417",
+                        "endColumns": "77",
+                        "endOffsets": "490"
+                    }
+                },
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "70,3,66,86,78,15,47,56,92,105,112,99",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3351,49,3212,4128,3753,778,2354,2678,4390,4920,5127,4668",
+                        "endLines": "76,12,68,88,84,40,53,63,96,107,122,103",
+                        "endColumns": "12,12,12,12,12,12,12,12,12,12,12,12",
+                        "endOffsets": "3747,771,3345,4279,4121,2178,2640,3205,4661,5068,5710,4914"
+                    },
+                    "to": {
+                        "startLines": "10,17,27,30,33,40,54,57,65,70,73,84",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "495,672,1399,1537,1693,2066,2629,2712,3244,3520,3673,4261",
+                        "endLines": "16,26,29,32,39,53,56,64,69,72,83,88",
+                        "endColumns": "12,12,12,12,12,12,12,12,12,12,12,12",
+                        "endOffsets": "667,1394,1532,1688,2061,2624,2707,3239,3515,3668,4256,4507"
+                    }
+                },
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "5,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "151,72",
+                        "endColumns": "90,53",
+                        "endOffsets": "237,121"
+                    },
+                    "to": {
+                        "startLines": "7,8",
+                        "startColumns": "4,4",
+                        "startOffsets": "272,363",
+                        "endColumns": "90,53",
+                        "endOffsets": "358,412"
+                    }
+                },
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/colors.xml",
+                    "from": {
+                        "startLines": "4,5,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "100,146,60",
+                        "endColumns": "45,48,39",
+                        "endOffsets": "141,190,95"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,101,150",
+                        "endColumns": "45,48,39",
+                        "endOffsets": "96,145,185"
+                    }
+                },
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/dimen.xml",
+                    "from": {
+                        "startLines": "17,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "947,196",
+                        "endColumns": "41,39",
+                        "endOffsets": "984,231"
+                    },
+                    "to": {
+                        "startLines": "5,6",
+                        "startColumns": "4,4",
+                        "startOffsets": "190,232",
+                        "endColumns": "41,39",
+                        "endOffsets": "227,267"
+                    }
+                }
+            ]
+        }
+    ]
+}
