@@ -19,6 +19,7 @@ import com.walaris.airscout.core.AxisCameraRepository
 import com.atakmap.android.util.Circle
 import com.atakmap.map.CameraController
 import java.util.concurrent.CopyOnWriteArraySet
+import kotlin.math.roundToInt
 
 class AirScoutMapController(
     private val context: Context,
@@ -327,6 +328,7 @@ class AirScoutMapController(
             (camera.frustumHorizontalFovDeg ?: DEFAULT_HORIZONTAL_FOV).coerceIn(1.0, 179.0)
         val verticalFov =
             (camera.frustumVerticalFovDeg ?: DEFAULT_VERTICAL_FOV).coerceIn(1.0, 179.0)
+        val segments = (horizontalFov / 4).roundToInt().coerceIn(6, 36)
         val bearing = camera.frustumBearingDeg ?: 0.0
         val center = marker.point
         val altitude = center.altitude
@@ -334,15 +336,15 @@ class AirScoutMapController(
         val endAzimuth = bearing + horizontalFov / 2.0
         marker.setTrack(bearing, 0.0)
 
-        val leftEdge = GeoCalculations.pointAtDistance(center, startAzimuth, range)
-        val rightEdge = GeoCalculations.pointAtDistance(center, endAzimuth, range)
-        val apex = GeoPoint(center.latitude, center.longitude, altitude)
-        val points = arrayOf(
-            apex,
-            GeoPoint(leftEdge.latitude, leftEdge.longitude, altitude),
-            GeoPoint(rightEdge.latitude, rightEdge.longitude, altitude),
-            apex
-        )
+        val points = ArrayList<GeoPoint>(segments + 3)
+        points += GeoPoint(center.latitude, center.longitude, altitude)
+        for (index in 0..segments) {
+            val fraction = index.toDouble() / segments.toDouble()
+            val azimuth = startAzimuth + (endAzimuth - startAzimuth) * fraction
+            val target = GeoCalculations.pointAtDistance(center, azimuth, range)
+            points += GeoPoint(target.latitude, target.longitude, altitude)
+        }
+        points += GeoPoint(center.latitude, center.longitude, altitude)
 
         val shapeId = "${camera.uid}-fovshape"
         val existingShape = mapView.getMapItem(shapeId) as? DrawingShape
@@ -351,7 +353,7 @@ class AirScoutMapController(
             setMetaBoolean("editable", false)
             setClosed(true)
         }
-        shape.setPoints(points)
+        shape.setPoints(points.toTypedArray())
         shape.setStrokeColor(FOV_STROKE_COLOR)
         shape.setStrokeWeight(2.5)
         shape.setFillColor(FOV_FILL_COLOR)
@@ -389,7 +391,7 @@ class AirScoutMapController(
             GeoPoint(arrowRight.latitude, arrowRight.longitude, altitude)
         ))
         arrowShape.setStrokeColor(FOV_STROKE_COLOR)
-        arrowShape.setStrokeWeight(2.5)
+        arrowShape.setStrokeWeight(2.0)
         arrowShape.setFillColor(Color.TRANSPARENT)
         arrowShape.setHeight(altitude)
         arrowShape.setMetaString("parent_uid", camera.uid)
@@ -402,27 +404,25 @@ class AirScoutMapController(
         }
 
         val pointId = "${camera.uid}-fovpoint"
-        val midPointAltitude = GeoPoint(midPoint.latitude, midPoint.longitude, altitude)
-        val existingPoint = mapView.getMapItem(pointId) as? Marker
-        val pointMarker = existingPoint ?: Marker(midPointAltitude, pointId).apply {
-            setType("${CAMERA_MARKER_TYPE}-mid")
+        val existingPoint = mapView.getMapItem(pointId) as? Circle
+        val pointRadius = (range * 0.03).coerceAtLeast(5.0)
+        val pointCircle = existingPoint ?: Circle(GeoPointMetaData.wrap(midPoint), pointRadius, pointId).apply {
             setMetaBoolean("archive", false)
             setMetaBoolean("editable", false)
-            setMetaBoolean("addToObjList", false)
-            setAlwaysShowText(false)
-            setClickable(false)
         }
-        pointMarker.setPoint(midPointAltitude)
-        pointMarker.setMetaString("parent_uid", camera.uid)
-        pointMarker.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
-        pointMarker.setTitle(context.getString(R.string.overlay_camera_fov_title, camera.displayName))
-        val iconUri = "android.resource://${context.packageName}/${R.drawable.ic_camera_marker}"
-        val pointIcon = Icon.Builder().setImageUri(0, iconUri).build()
-        pointMarker.setIcon(pointIcon)
+        pointCircle.setCenterPoint(GeoPointMetaData.wrap(GeoPoint(midPoint.latitude, midPoint.longitude, altitude)))
+        pointCircle.setRadius(pointRadius)
+        pointCircle.setColor(FOV_STROKE_COLOR)
+        pointCircle.setStrokeColor(FOV_STROKE_COLOR)
+        pointCircle.setStrokeWeight(2.0)
+        pointCircle.setFillColor(Color.TRANSPARENT)
+        pointCircle.setMetaString("parent_uid", camera.uid)
+        pointCircle.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        pointCircle.setTitle(context.getString(R.string.overlay_camera_fov_title, camera.displayName))
         if (existingPoint == null) {
-            mapView.getRootGroup().addItem(pointMarker)
+            mapView.getRootGroup().addItem(pointCircle)
         } else {
-            pointMarker.refresh(mapView.getMapEventDispatcher(), null, javaClass)
+            pointCircle.refresh(mapView.getMapEventDispatcher(), null, javaClass)
         }
     }
 
