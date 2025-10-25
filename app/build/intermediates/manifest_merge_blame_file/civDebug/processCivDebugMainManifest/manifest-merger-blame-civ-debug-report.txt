@@ -1,59 +1,68 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.atakmap.android.plugintemplate.plugin"
-4    android:versionCode="1"
-5    android:versionName="0.1 () - [5.5.0]" >
+3    package="com.walaris.airscout"
+4    android:versionCode="1761406633"
+5    android:versionName="0.1 (0fed6fd6) - [5.5.0]" >
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
 9        android:targetSdkVersion="34" />
 10
-11    <application
-11-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:5:5-27:19
-12        android:allowBackup="false"
-12-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:6:9-36
-13        android:debuggable="true"
-14        android:description="@string/app_desc"
-14-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:9:9-47
-15        android:extractNativeLibs="true"
-16        android:icon="@drawable/ic_launcher"
-16-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:7:9-45
-17        android:label="@string/app_name"
-17-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:8:9-41
-18        android:testOnly="true"
-19        android:theme="@style/AppTheme" >
-19-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:10:9-40
-20        <meta-data
-21            android:name="plugin-api"
-21-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:11:20-45
-22            android:value="com.atakmap.app@5.5.0.CIV" />
-22-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:11:46-79
-23        <meta-data
-23-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:12:9-78
-24            android:name="app_desc"
-24-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:12:20-43
-25            android:value="@string/app_desc" />
-25-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:12:44-76
-26
-27        <!--
-28            This fictitious activity entry allow for ATAK 4.6.0.2 and newer to perform 
-29            plugin discovery  android devices.  If this is removed, the plugin will 
-30            not be able to be discovered or loaded.
-31        -->
-32        <activity
-32-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:18:8-24:19
-33            android:name="com.atakmap.app.component"
-33-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:18:18-58
-34            android:exported="true" >
-34-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:19:12-35
-35            <intent-filter android:label="@string/app_name" >
-35-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:21:12-23:28
-35-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:21:27-59
-36                <action android:name="com.atakmap.app.component" />
-36-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:22:15-66
-36-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:22:23-63
-37            </intent-filter>
-38        </activity>
-39    </application>
-40
-41</manifest>
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:5:5-67
+11-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:6:5-79
+12-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:6:22-76
+13
+14    <application
+14-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:8:5-31:19
+15        android:allowBackup="false"
+15-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:9:9-36
+16        android:debuggable="true"
+17        android:description="@string/app_desc"
+17-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:12:9-47
+18        android:extractNativeLibs="true"
+19        android:icon="@drawable/ic_plugin_badge"
+19-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:10:9-49
+20        android:label="@string/app_name"
+20-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:11:9-41
+21        android:testOnly="true"
+22        android:theme="@style/AppTheme"
+22-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:13:9-40
+23        android:usesCleartextTraffic="true" >
+23-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:14:9-44
+24        <meta-data
+25            android:name="plugin-api"
+25-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:15:20-45
+26            android:value="com.atakmap.app@5.5.0.CIV" />
+26-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:15:46-79
+27        <meta-data
+27-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:16:9-78
+28            android:name="app_desc"
+28-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:16:20-43
+29            android:value="@string/app_desc" />
+29-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:16:44-76
+30
+31        <!--
+32            This fictitious activity entry allow for ATAK 4.6.0.2 and newer to perform 
+33            plugin discovery  android devices.  If this is removed, the plugin will 
+34            not be able to be discovered or loaded.
+35        -->
+36        <activity
+36-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:22:8-28:19
+37            android:name="com.atakmap.app.component"
+37-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:22:18-58
+38            android:exported="true" >
+38-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:23:12-35
+39            <intent-filter android:label="@string/app_name" >
+39-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:25:12-27:28
+39-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:25:27-59
+40                <action android:name="com.atakmap.app.component" />
+40-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:26:15-66
+40-->/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/AndroidManifest.xml:26:23-63
+41            </intent-filter>
+42        </activity>
+43    </application>
+44
+45</manifest>

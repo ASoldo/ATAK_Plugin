@@ -4,15 +4,15 @@
     "type": "PACKAGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.atakmap.android.plugintemplate.plugin",
+  "applicationId": "com.walaris.airscout",
   "variantName": "civDebug",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "0.1 () - [5.5.0]",
+      "versionCode": 1761406633,
+      "versionName": "0.1 (0fed6fd6) - [5.5.0]",
       "outputFile": "AndroidManifest.xml"
     }
   ],

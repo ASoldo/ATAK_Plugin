@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-mergeCivDebugResources-4:/layout/overlay_airscout_header.xml",
+        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-8:/layout/overlay_airscout_header.xml"
+    },
+    {
+        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-mergeCivDebugResources-4:/layout/overlay_airscout_footer.xml",
+        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-8:/layout/overlay_airscout_footer.xml"
+    },
+    {
+        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-mergeCivDebugResources-4:/layout/airscout_pane.xml",
+        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-8:/layout/airscout_pane.xml"
+    },
+    {
+        "merged": "com.walaris.airscout.app-mergeCivDebugResources-4:/layout/airscout_pane.xml",
+        "source": "com.walaris.airscout.app-main-8:/layout/airscout_pane.xml"
+    },
+    {
+        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-mergeCivDebugResources-4:/layout/overlay_airscout_camera_actions.xml",
+        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-8:/layout/overlay_airscout_camera_actions.xml"
+    },
+    {
+        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-mergeCivDebugResources-4:/layout/dialog_airscout_camera.xml",
+        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-8:/layout/dialog_airscout_camera.xml"
+    }
+]

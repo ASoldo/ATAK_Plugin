@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App -->
     <string name="app_name">Walaris AirScout</string>
-    <!-- description -->
-    <string name="app_desc">This plugin demonstrate Walaris AriScout capabilities</string>
+    <string name="app_desc">Mission-ready Axis camera control, live AI video, and resource management for Walaris AirScout teams.</string>
 
+    <string name="overlay_group_airscout">AirScout Cameras</string>
+    <string name="overlay_camera_description">RTSP endpoint: %1$s</string>
 
+    <string name="status_no_cameras">No video feeds selected. Choose one to begin streaming.</string>
+    <string name="status_selected_camera">Selected feed: %1$s</string>
+    <string name="status_stream_error">Stream error: %1$s</string>
 
-
+    <string name="overlay_add_camera">Add Video Feed</string>
+    <string name="overlay_action_control">Control</string>
+    <string name="overlay_action_remove">Remove</string>
+    <string name="pane_add_video">Select Feed</string>
+    <string name="pane_remove_camera">Remove Feed</string>
+    <string name="error_no_video_sources">No ATAK video feeds available.</string>
+    <string name="toast_camera_removed">Feed removed</string>
 </resources>

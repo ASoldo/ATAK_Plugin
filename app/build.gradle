@@ -10,6 +10,7 @@ buildscript {
 
     ext.PLUGIN_VERSION = "0.1"
     ext.ATAK_VERSION = "5.5.0"
+    ext.kotlin_version = '2.1.10'
 
     def takdevVersion = '3.+'
 
@@ -60,6 +61,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.13.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
         if(isDevKitEnabled()) {
             classpath "com.atakmap.gradle:atak-gradle-takdev:${takdevVersion}"
         } else {
@@ -81,6 +83,7 @@ allprojects {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'atak-takdev-plugin'
 apply from: "../gradle/typst.gradle"
 
@@ -106,10 +109,11 @@ def supportedFlavors =
 
 android {
     compileSdk 36
-    namespace 'com.atakmap.android.plugintemplate.plugin'
+    namespace 'com.walaris.airscout'
 
     buildFeatures {
         buildConfig = true
+        viewBinding = true
     }
 
     compileOptions {
@@ -117,9 +121,9 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    //kotlinOptions {
-    //    jvmTarget = JavaVersion.VERSION_17
-    //}
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
 
     // this is required and should not be removed otherwise the TAK 
     // inner signing check will fail and the plugin will not load
@@ -289,6 +293,8 @@ def getCommandFlavor() {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
+    implementation "com.squareup.okhttp3:okhttp:4.12.0"
 }
 
 configurations.all {
@@ -312,4 +318,3 @@ configurations.implementation {
        exclude group: 'androidx.lifecycle', module: 'lifecycle'
        exclude group: 'androidx.lifecycle', module: 'lifecycle-process'
 }       
-

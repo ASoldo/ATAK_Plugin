@@ -1,69 +1,62 @@
 {
     "logs": [
         {
-            "outputFile": "com.atakmap.android.plugintemplate.plugin.app-mergeCivDebugResources-3:/values/values.xml",
+            "outputFile": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-mergeCivDebugResources-3:/values/values.xml",
             "map": [
                 {
                     "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/build/generated/res/resValues/civ/debug/values/gradleResValues.xml",
                     "from": {
-                        "startLines": "6",
-                        "startColumns": "4",
-                        "startOffsets": "150",
-                        "endColumns": "77",
-                        "endOffsets": "223"
+                        "startLines": "-1",
+                        "startColumns": "-1",
+                        "startOffsets": "-1"
                     },
                     "to": {
-                        "startLines": "9",
+                        "startLines": "21",
                         "startColumns": "4",
-                        "startOffsets": "417",
-                        "endColumns": "77",
-                        "endOffsets": "490"
+                        "startOffsets": "1275",
+                        "endColumns": "85",
+                        "endOffsets": "1356"
                     }
                 },
                 {
                     "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/styles.xml",
                     "from": {
-                        "startLines": "70,3,66,86,78,15,47,56,92,105,112,99",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3351,49,3212,4128,3753,778,2354,2678,4390,4920,5127,4668",
-                        "endLines": "76,12,68,88,84,40,53,63,96,107,122,103",
-                        "endColumns": "12,12,12,12,12,12,12,12,12,12,12,12",
-                        "endOffsets": "3747,771,3345,4279,4121,2178,2640,3205,4661,5068,5710,4914"
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
                     },
                     "to": {
-                        "startLines": "10,17,27,30,33,40,54,57,65,70,73,84",
+                        "startLines": "22,29,39,42,45,52,66,69,77,82,85,96",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "495,672,1399,1537,1693,2066,2629,2712,3244,3520,3673,4261",
-                        "endLines": "16,26,29,32,39,53,56,64,69,72,83,88",
+                        "startOffsets": "1361,1538,2265,2403,2559,2932,3495,3578,4110,4386,4539,5127",
+                        "endLines": "28,38,41,44,51,65,68,76,81,84,95,100",
                         "endColumns": "12,12,12,12,12,12,12,12,12,12,12,12",
-                        "endOffsets": "667,1394,1532,1688,2061,2624,2707,3239,3515,3668,4256,4507"
+                        "endOffsets": "1533,2260,2398,2554,2927,3490,3573,4105,4381,4534,5122,5373"
                     }
                 },
                 {
                     "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/strings.xml",
                     "from": {
-                        "startLines": "5,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "151,72",
-                        "endColumns": "90,53",
-                        "endOffsets": "237,121"
+                        "startLines": "-1,-1,17,-1,-1,12,-1,-1,15,-1,8,-1,-1,-1",
+                        "startColumns": "-1,-1,4,-1,-1,4,-1,-1,4,-1,4,-1,-1,-1",
+                        "startOffsets": "-1,-1,915,-1,-1,628,-1,-1,806,-1,393,-1,-1,-1",
+                        "endColumns": "-1,-1,81,-1,-1,61,-1,-1,54,-1,101,-1,-1,-1",
+                        "endOffsets": "-1,-1,992,-1,-1,685,-1,-1,856,-1,490,-1,-1,-1"
                     },
                     "to": {
-                        "startLines": "7,8",
-                        "startColumns": "4,4",
-                        "startOffsets": "272,363",
-                        "endColumns": "90,53",
-                        "endOffsets": "358,412"
+                        "startLines": "7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "272,411,465,547,606,663,725,800,868,923,977,1079,1144,1211",
+                        "endColumns": "138,53,81,58,56,61,74,67,54,53,101,64,66,63",
+                        "endOffsets": "406,460,542,601,658,720,795,863,918,972,1074,1139,1206,1270"
                     }
                 },
                 {
                     "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/colors.xml",
                     "from": {
-                        "startLines": "4,5,3",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "100,146,60",
-                        "endColumns": "45,48,39",
-                        "endOffsets": "141,190,95"
+                        "startLines": "-1,-1,-1",
+                        "startColumns": "-1,-1,-1",
+                        "startOffsets": "-1,-1,-1"
                     },
                     "to": {
                         "startLines": "2,3,4",
@@ -76,11 +69,92 @@
                 {
                     "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/dimen.xml",
                     "from": {
-                        "startLines": "17,4",
+                        "startLines": "-1,-1",
+                        "startColumns": "-1,-1",
+                        "startOffsets": "-1,-1"
+                    },
+                    "to": {
+                        "startLines": "5,6",
                         "startColumns": "4,4",
-                        "startOffsets": "947,196",
+                        "startOffsets": "190,232",
                         "endColumns": "41,39",
-                        "endOffsets": "984,231"
+                        "endOffsets": "227,267"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.walaris.airscout.app-mergeCivDebugResources-3:/values/values.xml",
+            "map": [
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/build/generated/res/resValues/civ/debug/values/gradleResValues.xml",
+                    "from": {
+                        "startLines": "-1",
+                        "startColumns": "-1",
+                        "startOffsets": "-1"
+                    },
+                    "to": {
+                        "startLines": "21",
+                        "startColumns": "4",
+                        "startOffsets": "1284",
+                        "endColumns": "85",
+                        "endOffsets": "1365"
+                    }
+                },
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "22,29,39,42,45,52,66,69,77,82,85,96",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1370,1547,2274,2412,2568,2941,3504,3587,4119,4395,4548,5136",
+                        "endLines": "28,38,41,44,51,65,68,76,81,84,95,100",
+                        "endColumns": "12,12,12,12,12,12,12,12,12,12,12,12",
+                        "endOffsets": "1542,2269,2407,2563,2936,3499,3582,4114,4390,4543,5131,5382"
+                    }
+                },
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,16,-1,9,-1,18",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,4,-1,4,-1,4",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,867,-1,495,-1,1008",
+                        "endColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,58,-1,70,-1,61",
+                        "endOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,921,-1,561,-1,1065"
+                    },
+                    "to": {
+                        "startLines": "7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "272,411,465,547,606,663,725,800,868,923,982,1084,1155,1222",
+                        "endColumns": "138,53,81,58,56,61,74,67,54,58,101,70,66,61",
+                        "endOffsets": "406,460,542,601,658,720,795,863,918,977,1079,1150,1217,1279"
+                    }
+                },
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/colors.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1",
+                        "startColumns": "-1,-1,-1",
+                        "startOffsets": "-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,101,150",
+                        "endColumns": "45,48,39",
+                        "endOffsets": "96,145,185"
+                    }
+                },
+                {
+                    "source": "/home/rootster/Downloads/ATAK-CIV-5.5.1.7-SDK/samples/plugintemplate/app/src/main/res/values/dimen.xml",
+                    "from": {
+                        "startLines": "-1,-1",
+                        "startColumns": "-1,-1",
+                        "startOffsets": "-1,-1"
                     },
                     "to": {
                         "startLines": "5,6",
