@@ -321,9 +321,9 @@ class AirScoutMapController(
     private fun createSensorFov(camera: AxisCamera, marker: Marker) {
         val range = camera.frustumRangeMeters?.takeIf { it > 0 } ?: return
         val horizontalFov = (camera.frustumHorizontalFovDeg ?: DEFAULT_HORIZONTAL_FOV)
-            .roundToInt().coerceIn(1, 179)
+            .roundToInt().coerceIn(1, 179).toDouble()
         val verticalFov = (camera.frustumVerticalFovDeg ?: DEFAULT_VERTICAL_FOV)
-            .roundToInt().coerceIn(1, 179)
+            .roundToInt().coerceIn(1, 179).toDouble()
         val bearing = camera.frustumBearingDeg ?: 0.0
         mapView.getMapItem("${marker.uid}-fov")?.removeFromGroup()
         marker.setTrack(bearing, 0.0)
@@ -331,19 +331,23 @@ class AirScoutMapController(
             Color.red(FOV_COLOR) / 255f,
             Color.green(FOV_COLOR) / 255f,
             Color.blue(FOV_COLOR) / 255f,
-            FOV_OPACITY_DEG
+            FOV_ALPHA
         )
-        SensorDetailHandler.addFovToMap(
+        val sensorFov = SensorDetailHandler.addFovToMap(
             marker,
-            horizontalFov.toDouble(),
-            verticalFov.toDouble(),
+            bearing,
+            horizontalFov,
             range.coerceAtLeast(1.0),
             color,
             true
         )
-        (mapView.getMapItem("${marker.uid}-fov") as? MapItem)?.let { fov ->
+        (sensorFov ?: mapView.getMapItem("${marker.uid}-fov") as? MapItem)?.let { fov ->
             fov.setMetaString("parent_uid", camera.uid)
             fov.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+            fov.setMetaDouble(SensorDetailHandler.AZIMUTH_ATTRIBUTE, bearing)
+            fov.setMetaDouble(SensorDetailHandler.FOV_ATTRIBUTE, horizontalFov)
+            fov.setMetaDouble(SensorDetailHandler.VFOV_ATTRIBUTE, verticalFov)
+            fov.setMetaDouble(SensorDetailHandler.RANGE_ATTRIBUTE, range.coerceAtLeast(1.0))
         }
     }
 
@@ -357,7 +361,7 @@ class AirScoutMapController(
         private val CIRCLE_STROKE_COLOR = Color.parseColor("#FF4B6EA8")
         private val CIRCLE_FILL_COLOR = Color.parseColor("#334B6EA8")
         private val FOV_COLOR = Color.parseColor("#FFC1D034")
-        private const val FOV_OPACITY_DEG = 90f
+        private const val FOV_ALPHA = 0.45f
         private const val DEFAULT_HORIZONTAL_FOV = 60.0
         private const val DEFAULT_VERTICAL_FOV = 45.0
     }
