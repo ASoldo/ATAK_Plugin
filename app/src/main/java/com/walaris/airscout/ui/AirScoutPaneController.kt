@@ -2,7 +2,6 @@ package com.walaris.airscout.ui
 
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Color
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import android.view.Gravity
@@ -19,6 +18,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.atakmap.android.maps.MapView
 import com.atakmap.coremap.maps.coords.GeoPoint
 import com.walaris.airscout.R
@@ -317,7 +318,7 @@ class AirScoutPaneController(
             coneFields.visibility = View.GONE
         }
 
-        frustumGroup.setOnCheckedChangeListener { _, checkedId ->
+        frustumGroup.setOnCheckedChangeListener { _: RadioGroup, checkedId: Int ->
             if (checkedId == R.id.radioFrustumCircle) {
                 circleFields.visibility = View.VISIBLE
                 coneFields.visibility = View.GONE
@@ -518,18 +519,21 @@ class AirScoutPaneController(
                 val pad = (6 * density).toInt()
                 setPadding(0, pad, 0, pad)
             }
-            val iconView = ImageView(themedContext).apply {
-                setImageResource(entry.iconRes)
-                setColorFilter(Color.WHITE)
+            val iconDrawable = ContextCompat.getDrawable(context, entry.iconRes)?.mutate()
+            if (iconDrawable != null) {
+                DrawableCompat.setTint(iconDrawable, ContextCompat.getColor(themedContext, android.R.color.white))
+                val iconView = ImageView(themedContext).apply {
+                    setImageDrawable(iconDrawable)
+                }
+                val iconParams = LinearLayout.LayoutParams((20 * density).toInt(), (20 * density).toInt()).apply {
+                    marginEnd = (12 * density).toInt()
+                }
+                row.addView(iconView, iconParams)
             }
-            val iconParams = LinearLayout.LayoutParams((20 * density).toInt(), (20 * density).toInt()).apply {
-                marginEnd = (12 * density).toInt()
-            }
-            row.addView(iconView, iconParams)
 
             val textView = TextView(themedContext).apply {
                 text = entry.value
-                setTextColor(Color.WHITE)
+                setTextColor(ContextCompat.getColor(themedContext, android.R.color.white))
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
             }
             row.addView(textView, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))

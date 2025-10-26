@@ -12,14 +12,6 @@
         "source": "com.walaris.airscout.app-main-20:/layout/overlay_airscout_header.xml"
     },
     {
-        "merged": "com.walaris.airscout.app-mergeCivDebugResources-16:/layout/dialog_control_info.xml",
-        "source": "com.walaris.airscout.app-main-20:/layout/dialog_control_info.xml"
-    },
-    {
-        "merged": "com.walaris.airscout.app-mergeCivDebugResources-16:/layout/item_control_info.xml",
-        "source": "com.walaris.airscout.app-main-20:/layout/item_control_info.xml"
-    },
-    {
         "merged": "com.walaris.airscout.app-mergeCivDebugResources-16:/layout/item_airscout_resource.xml",
         "source": "com.walaris.airscout.app-main-20:/layout/item_airscout_resource.xml"
     },
