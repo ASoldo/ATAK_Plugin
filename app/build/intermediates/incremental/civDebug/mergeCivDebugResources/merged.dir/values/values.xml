@@ -98,6 +98,10 @@
     <attr format="boolean" name="use_artwork"/>
     <attr format="boolean" name="use_controller"/>
     <attr format="reference" name="vr_icon"/>
+    <color name="airscout_status_active">#2ECC71</color>
+    <color name="airscout_status_background">#331E88E5</color>
+    <color name="airscout_status_inactive">#D32F2F</color>
+    <color name="airscout_status_ripple">#1FFFFFFF</color>
     <color name="androidx_core_ripple_material_light">#1f000000</color>
     <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
     <color name="call_notification_answer_color">#1d873b</color>
@@ -117,6 +121,9 @@
     <color name="primary_text_default_material_dark">#ffffffff</color>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
     <color name="white">#ffffff</color>
+    <dimen name="airscout_status_button_margin">20dp</dimen>
+    <dimen name="airscout_status_button_size">56dp</dimen>
+    <dimen name="airscout_status_icon_padding">12dp</dimen>
     <dimen name="auto_margin">6dp</dimen>
     <dimen name="compat_button_inset_horizontal_material">4dp</dimen>
     <dimen name="compat_button_inset_vertical_material">6dp</dimen>
@@ -341,6 +348,7 @@
     <item quantity="one">Rewind <ns1:g example="1" id="rewind_amount">%d</ns1:g> second</item>
     <item quantity="other">Rewind <ns1:g example="30" id="rewind_amount">%d</ns1:g> seconds</item>
   </plurals>
+    <string name="airscout_status_button">Open AirScout resources</string>
     <string name="androidx_startup" translatable="false">androidx.startup</string>
     <string name="app_desc">Mission-ready Axis camera control, live AI video, and resource management for Walaris AirScout teams.</string>
     <string name="app_name">Walaris AirScout</string>
@@ -450,6 +458,8 @@
     <string name="resource_export_button">Export resources</string>
     <string name="resource_export_failure">Unable to export AirScout resources.</string>
     <string name="resource_export_none">No AirScout resources to export.</string>
+    <string name="resource_export_package_success">AirScout mission package saved to %1$s</string>
+    <string name="resource_export_partial">AirScout metadata saved to %1$s, but the mission package could not be created.</string>
     <string name="resource_export_success">Exported AirScout resources to %1$s</string>
     <string name="resource_field_altitude">Altitude (meters, optional)</string>
     <string name="resource_field_bearing">Bearing (° from north)</string>
@@ -477,9 +487,12 @@
     <string name="resource_import_merge">Merge</string>
     <string name="resource_import_mode_message">How would you like to apply the imported resources?</string>
     <string name="resource_import_none">No exported AirScout packages found.</string>
+    <string name="resource_import_package_failure">Unable to import AirScout mission package.</string>
+    <string name="resource_import_package_success">Imported AirScout mission package.</string>
     <string name="resource_import_replace">Replace existing</string>
     <string name="resource_import_success">Imported %1$d resources</string>
     <string name="resource_import_title">Import AirScout resources</string>
+    <string name="resource_import_unsupported">Selected file type is not supported.</string>
     <string name="resource_list_summary">Register streaming assets with metadata, then preview and control them when needed.</string>
     <string name="resource_list_title">AirScout Resources</string>
     <string name="resource_share_button">Share resources</string>
@@ -492,7 +505,7 @@
     <string name="status_selected_camera">Selected feed: %1$s</string>
     <string name="status_stream_error">Stream error: %1$s</string>
     <string name="toast_camera_removed">Feed removed</string>
-    <string name="versionName" translatable="false">0.1 (7cb84e5b) - [5.5.0]</string>
+    <string name="versionName" translatable="false">0.1 (bc592111) - [5.5.0]</string>
     <style name="ATAKEditText" parent="@android:style/Widget.EditText">
         
         

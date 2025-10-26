@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="airscout_status_button_size">56dp</dimen>
+    <dimen name="airscout_status_button_margin">20dp</dimen>
+    <dimen name="airscout_status_icon_padding">12dp</dimen>
+</resources>

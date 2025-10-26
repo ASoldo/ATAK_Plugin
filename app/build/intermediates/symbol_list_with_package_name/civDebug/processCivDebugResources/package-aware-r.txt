@@ -85,6 +85,10 @@ attr unplayed_color
 attr use_artwork
 attr use_controller
 attr vr_icon
+color airscout_status_active
+color airscout_status_background
+color airscout_status_inactive
+color airscout_status_ripple
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
 color call_notification_answer_color
@@ -104,6 +108,9 @@ color notification_material_background_media_default_color
 color primary_text_default_material_dark
 color secondary_text_default_material_dark
 color white
+dimen airscout_status_button_margin
+dimen airscout_status_button_size
+dimen airscout_status_icon_padding
 dimen auto_margin
 dimen compat_button_inset_horizontal_material
 dimen compat_button_inset_vertical_material
@@ -169,6 +176,7 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+drawable airscout_status_button_bg
 drawable bg_resource_card
 drawable btn_gray
 drawable exo_edit_mode_logo
@@ -333,6 +341,7 @@ id action_image
 id action_text
 id actions
 id addResourceButton
+id airscoutStatusButton
 id all
 id always
 id async
@@ -405,7 +414,6 @@ id exo_text
 id exo_time
 id exo_track_selection_view
 id exo_vr
-id exportResourcesButton
 id fill
 id fit
 id fixed_height
@@ -414,7 +422,6 @@ id forever
 id hide_ime_id
 id icon
 id icon_group
-id importResourcesButton
 id info
 id infoButton
 id inputAltitude
@@ -468,7 +475,6 @@ id resourceRoot
 id resourceStream
 id right_icon
 id right_side
-id shareResourcesButton
 id spherical_gl_surface_view
 id statusMessage
 id status_bar_latest_event_content
@@ -503,6 +509,7 @@ integer exo_media_button_opacity_percentage_disabled
 integer exo_media_button_opacity_percentage_enabled
 integer status_bar_notification_info_maxnum
 layout airscout_pane
+layout airscout_status_button
 layout custom_dialog
 layout dialog_airscout_resource
 layout exo_legacy_player_control_view
@@ -538,6 +545,7 @@ layout overlay_airscout_footer
 layout overlay_airscout_header
 plurals exo_controls_fastforward_by_amount_description
 plurals exo_controls_rewind_by_amount_description
+string airscout_status_button
 string androidx_startup
 string app_desc
 string app_name
@@ -647,6 +655,8 @@ string resource_empty_message
 string resource_export_button
 string resource_export_failure
 string resource_export_none
+string resource_export_package_success
+string resource_export_partial
 string resource_export_success
 string resource_field_altitude
 string resource_field_bearing
@@ -674,9 +684,12 @@ string resource_import_failure
 string resource_import_merge
 string resource_import_mode_message
 string resource_import_none
+string resource_import_package_failure
+string resource_import_package_success
 string resource_import_replace
 string resource_import_success
 string resource_import_title
+string resource_import_unsupported
 string resource_list_summary
 string resource_list_title
 string resource_share_button

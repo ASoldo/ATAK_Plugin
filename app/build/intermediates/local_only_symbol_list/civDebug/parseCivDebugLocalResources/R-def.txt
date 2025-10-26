@@ -1,10 +1,18 @@
 R_DEF: Internal format may change without notice
 local
+color airscout_status_active
+color airscout_status_background
+color airscout_status_inactive
+color airscout_status_ripple
 color darker_gray
 color heading_yellow
 color white
+dimen airscout_status_button_margin
+dimen airscout_status_button_size
+dimen airscout_status_icon_padding
 dimen auto_margin
 dimen fontSize
+drawable airscout_status_button_bg
 drawable bg_resource_card
 drawable btn_gray
 drawable ic_add
@@ -29,6 +37,7 @@ drawable new_dark_button_bg
 drawable new_dark_button_disabled
 drawable new_dark_button_selected
 id addResourceButton
+id airscoutStatusButton
 id backButton
 id circleFields
 id coneFields
@@ -40,8 +49,6 @@ id controlTitle
 id deleteButton
 id editButton
 id emptyMessage
-id exportResourcesButton
-id importResourcesButton
 id infoButton
 id inputAltitude
 id inputBearing
@@ -76,17 +83,18 @@ id resourceName
 id resourceRecyclerView
 id resourceRoot
 id resourceStream
-id shareResourcesButton
 id statusMessage
 id useMapCenterButton
 id videoImageView
 id videoPlayerView
 layout airscout_pane
+layout airscout_status_button
 layout dialog_airscout_resource
 layout item_airscout_resource
 layout overlay_airscout_camera_actions
 layout overlay_airscout_footer
 layout overlay_airscout_header
+string airscout_status_button
 string app_desc
 string app_name
 string control_info_button_content_description
@@ -136,6 +144,8 @@ string resource_empty_message
 string resource_export_button
 string resource_export_failure
 string resource_export_none
+string resource_export_package_success
+string resource_export_partial
 string resource_export_success
 string resource_field_altitude
 string resource_field_bearing
@@ -163,9 +173,12 @@ string resource_import_failure
 string resource_import_merge
 string resource_import_mode_message
 string resource_import_none
+string resource_import_package_failure
+string resource_import_package_success
 string resource_import_replace
 string resource_import_success
 string resource_import_title
+string resource_import_unsupported
 string resource_list_summary
 string resource_list_title
 string resource_share_button

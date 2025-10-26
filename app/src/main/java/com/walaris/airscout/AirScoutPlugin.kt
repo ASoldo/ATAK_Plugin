@@ -1,7 +1,13 @@
 package com.walaris.airscout
 
 import android.content.Context
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.RelativeLayout
+import android.widget.ImageButton
+import androidx.core.graphics.drawable.DrawableCompat
 import com.atakmap.android.cot.detail.CotDetailManager
 import com.atakmap.android.importexport.ImporterManager
 import com.atakmap.android.importexport.MarshalManager as LegacyMarshalManager
@@ -36,6 +42,7 @@ class AirScoutPlugin(
     private val toolbarItem: ToolbarItem
     private var pane: Pane? = null
     private var paneView: View? = null
+    private var statusButtonView: View? = null
 
     private val repository: AxisCameraRepository
     private val mapController: AirScoutMapController
@@ -78,7 +85,9 @@ class AirScoutPlugin(
         uiService?.addToolbarItem(toolbarItem)
         mapController.registerListener(this)
         mapController.start()
+        mapController.reloadFromRepository()
         CotDetailManager.getInstance().registerHandler(AirScoutDetailHandler.DETAIL_TAG, detailHandler)
+        attachStatusButton()
     }
 
     override fun onStop() {
@@ -88,6 +97,7 @@ class AirScoutPlugin(
         paneView?.let { paneController.unbind() }
         cameraController.shutdown()
         CotDetailManager.getInstance().unregisterHandler(detailHandler)
+        detachStatusButton()
         pane = null
         paneView = null
     }
@@ -168,5 +178,58 @@ class AirScoutPlugin(
             registerTask.run()
         }
         importRegistered = true
+    }
+
+    private fun attachStatusButton() {
+        val mapView = runCatching { MapView.getMapView() }.getOrNull() ?: return
+        mapView.post {
+            val parent: ViewGroup = mapView
+            val existing = statusButtonView
+            if (existing != null && existing.parent === parent) {
+                existing.findViewById<View>(R.id.airscoutStatusButton)?.setOnClickListener { showPane() }
+                updateStatusButtonState(true)
+                return@post
+            }
+            val container = PluginLayoutInflater.inflate(pluginContext, R.layout.airscout_status_button, parent, false)
+            container.findViewById<View>(R.id.airscoutStatusButton)?.setOnClickListener { showPane() }
+            val size = pluginContext.resources.getDimensionPixelSize(R.dimen.airscout_status_button_size)
+            val margin = pluginContext.resources.getDimensionPixelSize(R.dimen.airscout_status_button_margin)
+            val layoutParams: ViewGroup.LayoutParams = when (parent) {
+                is FrameLayout -> FrameLayout.LayoutParams(size, size, Gravity.BOTTOM or Gravity.END).apply {
+                    marginEnd = margin
+                    bottomMargin = margin
+                }
+                is RelativeLayout -> RelativeLayout.LayoutParams(size, size).apply {
+                    addRule(RelativeLayout.ALIGN_PARENT_END)
+                    addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
+                    marginEnd = margin
+                    bottomMargin = margin
+                }
+                else -> ViewGroup.MarginLayoutParams(size, size).apply {
+                    marginEnd = margin
+                    bottomMargin = margin
+                }
+            }
+            parent.addView(container, layoutParams)
+            statusButtonView = container
+            updateStatusButtonState(true)
+        }
+    }
+
+    private fun detachStatusButton() {
+        val view = statusButtonView ?: return
+        view.post {
+            val parent = view.parent as? ViewGroup
+            parent?.removeView(view)
+        }
+        statusButtonView = null
+    }
+
+    private fun updateStatusButtonState(active: Boolean) {
+        val buttonView = statusButtonView?.findViewById<ImageButton>(R.id.airscoutStatusButton) ?: return
+        val background = buttonView.background?.mutate() ?: return
+        val color = pluginContext.getColor(if (active) R.color.airscout_status_active else R.color.airscout_status_inactive)
+        DrawableCompat.setTint(background, color)
+        buttonView.background = background
     }
 }
