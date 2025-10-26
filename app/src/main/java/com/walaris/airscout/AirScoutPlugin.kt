@@ -222,10 +222,8 @@ class AirScoutPlugin(
 
     private fun updateStatusButtonState(active: Boolean) {
         val buttonView = statusButtonView?.findViewById<ImageButton>(R.id.airscoutStatusButton) ?: return
-        val background = buttonView.background?.mutate() ?: return
         val color = pluginContext.getColor(if (active) R.color.airscout_status_active else R.color.airscout_status_inactive)
-        DrawableCompat.setTint(background, color)
-        buttonView.background = background
+        buttonView.backgroundTintList = android.content.res.ColorStateList.valueOf(color)
     }
 
     private fun updateStatusButtonPlacement() {

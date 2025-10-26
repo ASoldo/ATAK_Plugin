@@ -6,7 +6,7 @@
     <color name="heading_yellow">#dfb228</color>
     <color name="airscout_status_background">#331E88E5</color>
     <color name="airscout_status_ripple">#1FFFFFFF</color>
-    <color name="airscout_status_active">#2ECC71</color>
+    <color name="airscout_status_active">#FF2ECC71</color>
     <color name="airscout_status_inactive">#D32F2F</color>
 
 </resources>

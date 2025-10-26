@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="airscout_status_active">#2ECC71</color>
+    <color name="airscout_status_active">#FF2ECC71</color>
     <color name="airscout_status_background">#331E88E5</color>
     <color name="airscout_status_inactive">#D32F2F</color>
     <color name="airscout_status_ripple">#1FFFFFFF</color>
@@ -108,7 +108,7 @@
     <string name="status_selected_camera">Selected feed: %1$s</string>
     <string name="status_stream_error">Stream error: %1$s</string>
     <string name="toast_camera_removed">Feed removed</string>
-    <string name="versionName" translatable="false">0.1 (735ab034) - [5.5.0]</string>
+    <string name="versionName" translatable="false">0.1 (c6fb955b) - [5.5.0]</string>
     <style name="ATAKEditText" parent="@android:style/Widget.EditText">
         
         

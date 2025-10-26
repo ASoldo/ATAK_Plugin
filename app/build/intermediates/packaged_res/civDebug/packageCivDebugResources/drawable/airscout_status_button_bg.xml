@@ -3,7 +3,7 @@
     android:color="@color/airscout_status_ripple">
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/airscout_status_background" />
+            <solid android:color="@color/airscout_status_active" />
         </shape>
     </item>
 </ripple>
