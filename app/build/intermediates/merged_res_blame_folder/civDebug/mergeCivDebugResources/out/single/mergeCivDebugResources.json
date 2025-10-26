@@ -92,6 +92,10 @@
         "source": "com.walaris.airscout.app-main-20:/drawable/ic_preview.xml"
     },
     {
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_info.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_info.xml"
+    },
+    {
         "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_toolbar.xml.flat",
         "source": "com.walaris.airscout.app-main-20:/drawable/ic_toolbar.xml"
     },

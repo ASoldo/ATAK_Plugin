@@ -39,6 +39,7 @@ class AirScoutPaneController(
     private var currentCamera: AxisCamera? = null
     private var pendingSelectUid: String? = null
     private var pendingEditCamera: AxisCamera? = null
+    private var currentInfoDetails: List<Pair<Int, String>> = emptyList()
 
     private val resourceAdapter = ResourceAdapter(object : ResourceAdapter.Listener {
         override fun onPreview(camera: AxisCamera) {
@@ -93,6 +94,8 @@ class AirScoutPaneController(
         val ui = binding ?: return
         ui.joystickOverlay.listener = this
         ui.backButton.setOnClickListener { showList() }
+        ui.infoButton.setOnClickListener { showControlInfoDialog() }
+        ui.infoButton.visibility = View.GONE
     }
 
     private fun showList(selectUid: String? = null) {
@@ -106,6 +109,8 @@ class AirScoutPaneController(
         currentCamera = null
         pendingSelectUid = selectUid
         resourceAdapter.setSelected(null)
+        currentInfoDetails = emptyList()
+        ui.infoButton.visibility = View.GONE
     }
 
     private fun showControl(camera: AxisCamera) {
@@ -121,24 +126,24 @@ class AirScoutPaneController(
             ui.controlSubtitle.visibility = View.VISIBLE
             ui.controlSubtitle.text = camera.description
         }
+        ui.infoButton.visibility = View.VISIBLE
         updateControlInfo(camera)
         updateStatus("")
         startStream(camera)
     }
 
     private fun updateControlInfo(camera: AxisCamera) {
-        val ui = binding ?: return
         val stream = camera.rtspUrl.takeIf { it.isNotBlank() }
-        ui.controlStreamInfo.text = stream?.let {
+        val streamText = stream?.let {
             context.getString(R.string.control_info_stream, it)
         } ?: context.getString(R.string.control_info_stream_placeholder)
 
         val controlEndpoint = camera.controlUrl.takeIf { it.isNotBlank() }
-        ui.controlControlInfo.text = controlEndpoint?.let {
+        val controlText = controlEndpoint?.let {
             context.getString(R.string.control_info_control, it)
         } ?: context.getString(R.string.control_info_control_placeholder)
 
-        val location = if (camera.latitude != 0.0 || camera.longitude != 0.0) {
+        val locationText = if (camera.latitude != 0.0 || camera.longitude != 0.0) {
             val altitudeSuffix = camera.altitude.takeIf { abs(it) > 0.01 }
                 ?.let { String.format(Locale.US, ", %.1f m", it) } ?: ""
             context.getString(
@@ -150,9 +155,8 @@ class AirScoutPaneController(
         } else {
             context.getString(R.string.control_info_location_placeholder)
         }
-        ui.controlLocationInfo.text = location
 
-        ui.controlFrustumInfo.text = when (camera.frustumMode) {
+        val frustumText = when (camera.frustumMode) {
             AxisCamera.FrustumMode.CIRCLE -> {
                 val radius = (camera.frustumRadiusMeters ?: camera.frustumRangeMeters)?.takeIf { it > 0 }
                 radius?.let {
@@ -198,6 +202,13 @@ class AirScoutPaneController(
                 }
             }
         }
+
+        currentInfoDetails = listOf(
+            R.string.control_info_label_stream to streamText,
+            R.string.control_info_label_control to controlText,
+            R.string.control_info_label_location to locationText,
+            R.string.control_info_label_frustum to frustumText
+        )
     }
 
     private fun refreshResourceList(selectUid: String? = null) {
@@ -474,6 +485,26 @@ class AirScoutPaneController(
 
     private fun updateStatus(message: String) {
         binding?.statusMessage?.text = message
+    }
+
+    private fun showControlInfoDialog() {
+        val baseContext = runCatching { MapView.getMapView().context }.getOrNull()
+            ?: binding?.root?.context
+            ?: context
+        val themedContext = ContextThemeWrapper(baseContext, R.style.ATAKPluginTheme)
+        val message = buildString {
+            currentInfoDetails.forEachIndexed { index, (labelRes, value) ->
+                if (index > 0) append('\n')
+                append(context.getString(labelRes))
+                append(": ")
+                append(value)
+            }
+        }.ifBlank { context.getString(R.string.control_info_dialog_empty) }
+        AlertDialog.Builder(themedContext)
+            .setTitle(context.getString(R.string.control_info_dialog_title))
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
     }
 
     // Joystick listener

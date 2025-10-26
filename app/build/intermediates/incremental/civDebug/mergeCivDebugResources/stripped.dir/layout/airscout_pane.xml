@@ -131,60 +131,16 @@
                             android:textColor="#B3FFFFFF"
                             android:textSize="14sp" />
                     </LinearLayout>
-                </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/controlInfoContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp">
-
-                    <TextView
-                        android:id="@+id/controlStreamInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#B3FFFFFF"
-                        android:textSize="13sp"
-                        android:drawablePadding="6dp"
-                        android:paddingBottom="4dp"
-                        android:drawableStart="@drawable/ic_stream"
-                        android:text="@string/control_info_stream_placeholder" />
-
-                    <TextView
-                        android:id="@+id/controlControlInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#B3FFFFFF"
-                        android:textSize="13sp"
-                        android:drawablePadding="6dp"
-                        android:paddingBottom="4dp"
-                        android:drawableStart="@drawable/ic_control"
-                        android:text="@string/control_info_control_placeholder" />
-
-                    <TextView
-                        android:id="@+id/controlLocationInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#B3FFFFFF"
-                        android:textSize="13sp"
-                        android:drawablePadding="6dp"
-                        android:paddingBottom="4dp"
-                        android:drawableStart="@drawable/ic_location"
-                        android:text="@string/control_info_location_placeholder" />
-
-                    <TextView
-                        android:id="@+id/controlFrustumInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#B3FFFFFF"
-                        android:textSize="13sp"
-                        android:drawablePadding="6dp"
-                        android:paddingBottom="4dp"
-                        android:drawableStart="@drawable/ic_frustum"
-                        android:text="@string/control_info_frustum_placeholder" />
+                    <ImageButton
+                        android:id="@+id/infoButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/control_info_button_content_description"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_info"
+                        android:tint="#FFFFFFFF" />
                 </LinearLayout>
 
                 <TextView
