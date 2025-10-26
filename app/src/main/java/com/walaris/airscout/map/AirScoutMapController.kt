@@ -360,6 +360,7 @@ class AirScoutMapController(
         shape.setHeight(altitude)
         shape.setMetaString("parent_uid", camera.uid)
         shape.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        shape.setMetaBoolean("labels_on", true)
         shape.setMetaDouble("bearing", bearing)
         shape.setMetaDouble("hfov", horizontalFov)
         shape.setMetaDouble("vfov", verticalFov)
@@ -395,6 +396,7 @@ class AirScoutMapController(
         arrowShape.setHeight(altitude)
         arrowShape.setMetaString("parent_uid", camera.uid)
         arrowShape.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
+        arrowShape.setMetaBoolean("labels_on", true)
         arrowShape.setTitle(context.getString(R.string.overlay_camera_fov_title, camera.displayName))
         if (existingArrow == null) {
             mapView.getRootGroup().addItem(arrowShape)
@@ -402,39 +404,12 @@ class AirScoutMapController(
             arrowShape.refresh(mapView.getMapEventDispatcher(), null, javaClass)
         }
 
-        val fovTitle = context.getString(R.string.overlay_camera_fov_title, camera.displayName)
-        val controlIconUri = "android.resource://${context.packageName}/${R.drawable.fov_control_dot}"
-        val controlIcon = Icon.Builder()
-            .setImageUri(0, controlIconUri)
-            .build()
-
-        val tipMarkerId = "${camera.uid}-fovtipFOV"
-        val tipGeoPoint = GeoPoint(arrowHead.latitude, arrowHead.longitude, altitude)
-        val existingTip = mapView.getMapItem(tipMarkerId) as? Marker
-        val tipMarker = existingTip ?: Marker(tipGeoPoint, tipMarkerId).apply {
-            setMetaBoolean("archive", false)
-            setMetaBoolean("editable", true)
-            setClickable(true)
-            setType(FOV_CONTROL_MARKER_TYPE)
-        }
-        tipMarker.setPoint(tipGeoPoint)
-        tipMarker.setIcon(controlIcon)
-        tipMarker.setTitle(fovTitle)
-        tipMarker.setMetaString("parent_uid", camera.uid)
-        tipMarker.setMetaString("callsign", fovTitle)
-        tipMarker.setMetaString("control_role", "endpoint")
-        if (existingTip == null) {
-            mapView.getRootGroup().addItem(tipMarker)
-        } else {
-            tipMarker.refresh(mapView.getMapEventDispatcher(), null, javaClass)
-        }
     }
 
     private fun clearFrustumOverlay(cameraId: String) {
         mapView.getMapItem("$cameraId-ring")?.removeFromGroup()
         mapView.getMapItem("$cameraId-fovshape")?.removeFromGroup()
         mapView.getMapItem("$cameraId-fovarrow")?.removeFromGroup()
-        mapView.getMapItem("$cameraId-fovtipFOV")?.removeFromGroup()
     }
 
     companion object {
@@ -445,6 +420,5 @@ class AirScoutMapController(
         private val FOV_FILL_COLOR = Color.parseColor("#33C1D034")
         private const val DEFAULT_HORIZONTAL_FOV = 60.0
         private const val DEFAULT_VERTICAL_FOV = 45.0
-        private const val FOV_CONTROL_MARKER_TYPE = "b-walaris-airscout-fov-control"
     }
 }

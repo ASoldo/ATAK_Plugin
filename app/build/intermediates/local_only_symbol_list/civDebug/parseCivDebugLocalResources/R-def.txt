@@ -7,7 +7,6 @@ dimen auto_margin
 dimen fontSize
 drawable bg_resource_card
 drawable btn_gray
-drawable fov_control_dot
 drawable ic_add
 drawable ic_arrow_back
 drawable ic_camera_marker

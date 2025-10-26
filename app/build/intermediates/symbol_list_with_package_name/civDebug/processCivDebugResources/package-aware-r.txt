@@ -252,7 +252,6 @@ drawable exo_styled_controls_speed
 drawable exo_styled_controls_subtitle_off
 drawable exo_styled_controls_subtitle_on
 drawable exo_styled_controls_vr
-drawable fov_control_dot
 drawable ic_add
 drawable ic_arrow_back
 drawable ic_call_answer
