@@ -1,138 +1,134 @@
 [
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_launcher.png.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_launcher.png"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_control.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_control.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_btn_gray.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/btn_gray.xml"
-    },
-    {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_preview.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_preview.xml"
-    },
-    {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_location.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_location.xml"
-    },
-    {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/layout_airscout_pane.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/layout/airscout_pane.xml"
-    },
-    {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_edit.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_edit.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_add.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_add.xml"
     },
     {
         "merged": "com.walaris.airscout.app-civDebug-17:/layout_airscout_pane.xml.flat",
         "source": "com.walaris.airscout.app-main-20:/layout/airscout_pane.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_new_dark_button_selected.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/new_dark_button_selected.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/layout_overlay_airscout_camera_actions.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/layout/overlay_airscout_camera_actions.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/layout_overlay_airscout_footer.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/layout/overlay_airscout_footer.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_plugin_badge.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_plugin_badge.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_add.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_add.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_location.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_location.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_arrow_back.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_arrow_back.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/layout_overlay_airscout_header.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/layout/overlay_airscout_header.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_plugin_badge.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_plugin_badge.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_btn_gray.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/btn_gray.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/layout_dialog_airscout_resource.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/layout/dialog_airscout_resource.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_arrow_back.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_arrow_back.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_camera_marker.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_camera_marker.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_bg_resource_card.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/bg_resource_card.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/layout_item_airscout_resource.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/layout/item_airscout_resource.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_launcher.png.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_launcher.png"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_info.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_info.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_share.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_share.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/layout_airscout_status_button.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/layout/airscout_status_button.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/layout_dialog_airscout_resource.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/layout/dialog_airscout_resource.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/xml_com_android_vending_archive_opt_out.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/xml/com_android_vending_archive_opt_out.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_frustum.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_frustum.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_new_dark_button_disabled.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/new_dark_button_disabled.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_stream.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_stream.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_airscout_status_button_bg.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/airscout_status_button_bg.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/layout_overlay_airscout_footer.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/layout/overlay_airscout_footer.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_delete.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_delete.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_new_dark_button_selected.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/new_dark_button_selected.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_stream.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_stream.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_plugin_badge_camera.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_plugin_badge_camera.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_frustum.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_frustum.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/layout_item_airscout_resource.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/layout/item_airscout_resource.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_share.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_share.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_airscout_status_button_bg.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/airscout_status_button_bg.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_import.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_import.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/layout_airscout_status_button.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/layout/airscout_status_button.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_toolbar.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_toolbar.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/xml_com_android_vending_archive_opt_out.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/xml/com_android_vending_archive_opt_out.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/layout_overlay_airscout_header.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/layout/overlay_airscout_header.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_camera_marker.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_camera_marker.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_plugin_badge_camera.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_plugin_badge_camera.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_edit.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_edit.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_new_dark_button_bg.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/new_dark_button_bg.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_new_dark_button_bg.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/new_dark_button_bg.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/xml_file_paths.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/xml/file_paths.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_import.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_import.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_control.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_control.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_preview.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_preview.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_bg_resource_card.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/bg_resource_card.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/xml_file_paths.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/xml/file_paths.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/layout_overlay_airscout_camera_actions.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/layout/overlay_airscout_camera_actions.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_info.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_info.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_export.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_export.xml"
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_toolbar.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_toolbar.xml"
+    },
+    {
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_export.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_export.xml"
+    },
+    {
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_new_dark_button_disabled.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/new_dark_button_disabled.xml"
+    },
+    {
+        "merged": "com.walaris.airscout.app-civDebug-17:/drawable_ic_delete.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/drawable/ic_delete.xml"
     }
 ]
