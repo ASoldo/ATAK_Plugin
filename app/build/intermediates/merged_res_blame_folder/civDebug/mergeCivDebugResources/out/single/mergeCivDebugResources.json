@@ -24,10 +24,6 @@
         "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_edit.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_fov_control_dot.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/fov_control_dot.xml"
-    },
-    {
         "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_new_dark_button_selected.xml.flat",
         "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/new_dark_button_selected.xml"
     },
@@ -66,6 +62,10 @@
     {
         "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_new_dark_button_disabled.xml.flat",
         "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/new_dark_button_disabled.xml"
+    },
+    {
+        "merged": "com.walaris.airscout.app-civDebug-17:/layout_dialog_airscout_resource.xml.flat",
+        "source": "com.walaris.airscout.app-main-20:/layout/dialog_airscout_resource.xml"
     },
     {
         "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_delete.xml.flat",

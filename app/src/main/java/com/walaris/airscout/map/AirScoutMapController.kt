@@ -310,6 +310,8 @@ class AirScoutMapController(
         val circleId = "${camera.uid}-ring"
         mapView.getMapItem(circleId)?.removeFromGroup()
         val circle = Circle(GeoPointMetaData.wrap(marker.point), radius, circleId)
+        circle.setMetaBoolean("archive", false)
+        circle.setMetaBoolean("editable", false)
         circle.setTitle(context.getString(R.string.overlay_camera_ring_title, camera.displayName))
         circle.setMetaString("parent_uid", camera.uid)
         circle.setMetaString("callsign", circle.title)
@@ -320,6 +322,36 @@ class AirScoutMapController(
         circle.setMetaBoolean("labels_on", false)
         circle.setHeight(marker.point.altitude)
         mapView.getRootGroup().addItem(circle)
+
+        val zoomId = "${camera.uid}-zoomring"
+        val zoomRadius = (camera.frustumZoomRadiusMeters ?: camera.frustumZoomRangeMeters)
+            ?.takeIf { it > 0 }
+            ?.coerceAtMost(radius)
+        if (zoomRadius != null) {
+            val existingZoom = mapView.getMapItem(zoomId) as? Circle
+            val zoomCircle = existingZoom ?: Circle(GeoPointMetaData.wrap(marker.point), zoomRadius, zoomId).apply {
+                setMetaBoolean("archive", false)
+                setMetaBoolean("editable", false)
+            }
+            zoomCircle.setCenterPoint(GeoPointMetaData.wrap(marker.point))
+            zoomCircle.setRadius(zoomRadius)
+            zoomCircle.setColor(ZOOM_STROKE_COLOR)
+            zoomCircle.setStrokeColor(ZOOM_STROKE_COLOR)
+            zoomCircle.setStrokeWeight(2.0)
+            zoomCircle.setFillColor(ZOOM_FILL_COLOR)
+            zoomCircle.setMetaString("parent_uid", camera.uid)
+            zoomCircle.setMetaString("callsign", context.getString(R.string.overlay_camera_zoom_title, camera.displayName))
+            zoomCircle.setMetaBoolean("labels_on", false)
+            zoomCircle.setHeight(marker.point.altitude)
+            zoomCircle.setTitle(context.getString(R.string.overlay_camera_zoom_title, camera.displayName))
+            if (existingZoom == null) {
+                mapView.getRootGroup().addItem(zoomCircle)
+            } else {
+                zoomCircle.refresh(mapView.getMapEventDispatcher(), null, javaClass)
+            }
+        } else {
+            mapView.getMapItem(zoomId)?.removeFromGroup()
+        }
     }
 
     private fun createSensorFov(camera: AxisCamera, marker: Marker) {
@@ -404,12 +436,62 @@ class AirScoutMapController(
             arrowShape.refresh(mapView.getMapEventDispatcher(), null, javaClass)
         }
 
+        val zoomRangeCandidate = camera.frustumZoomRangeMeters
+            ?: camera.frustumZoomRadiusMeters
+        val zoomRange = zoomRangeCandidate?.takeIf { it > 0 }
+        val zoomShapeId = "${camera.uid}-zoomfov"
+        if (zoomRange != null) {
+            val zoomRatio = (zoomRange / range).coerceIn(0.05, 1.0)
+            val zoomHorizontalFov = horizontalFov * zoomRatio
+            val zoomVerticalFov = verticalFov * zoomRatio
+            val zoomStartAzimuth = bearing - zoomHorizontalFov / 2.0
+            val zoomEndAzimuth = bearing + zoomHorizontalFov / 2.0
+            val zoomPoints = ArrayList<GeoPoint>(segments + 3)
+            zoomPoints += GeoPoint(center.latitude, center.longitude, altitude)
+            for (index in 0..segments) {
+                val fraction = index.toDouble() / segments.toDouble()
+                val azimuth = zoomStartAzimuth + (zoomEndAzimuth - zoomStartAzimuth) * fraction
+                val target = GeoCalculations.pointAtDistance(center, azimuth, range)
+                zoomPoints += GeoPoint(target.latitude, target.longitude, altitude)
+            }
+            zoomPoints += GeoPoint(center.latitude, center.longitude, altitude)
+
+            val existingZoomShape = mapView.getMapItem(zoomShapeId) as? DrawingShape
+            val zoomShape = existingZoomShape ?: DrawingShape(mapView, zoomShapeId).apply {
+                setMetaBoolean("archive", false)
+                setMetaBoolean("editable", false)
+                setClosed(true)
+            }
+            zoomShape.setPoints(zoomPoints.toTypedArray())
+            zoomShape.setStrokeColor(ZOOM_STROKE_COLOR)
+            zoomShape.setStrokeWeight(2.0)
+            zoomShape.setFillColor(ZOOM_FILL_COLOR)
+            zoomShape.setHeight(altitude)
+            zoomShape.setMetaString("parent_uid", camera.uid)
+            zoomShape.setMetaString("callsign", context.getString(R.string.overlay_camera_zoom_title, camera.displayName))
+            zoomShape.setMetaBoolean("labels_on", false)
+            zoomShape.setMetaDouble("bearing", bearing)
+            zoomShape.setMetaDouble("hfov", zoomHorizontalFov)
+            zoomShape.setMetaDouble("vfov", zoomVerticalFov)
+            zoomShape.setMetaDouble("range", range)
+            zoomShape.setTitle(context.getString(R.string.overlay_camera_zoom_title, camera.displayName))
+            if (existingZoomShape == null) {
+                mapView.getRootGroup().addItem(zoomShape)
+            } else {
+                zoomShape.refresh(mapView.getMapEventDispatcher(), null, javaClass)
+            }
+        } else {
+            mapView.getMapItem(zoomShapeId)?.removeFromGroup()
+        }
+
     }
 
     private fun clearFrustumOverlay(cameraId: String) {
         mapView.getMapItem("$cameraId-ring")?.removeFromGroup()
         mapView.getMapItem("$cameraId-fovshape")?.removeFromGroup()
         mapView.getMapItem("$cameraId-fovarrow")?.removeFromGroup()
+        mapView.getMapItem("$cameraId-zoomring")?.removeFromGroup()
+        mapView.getMapItem("$cameraId-zoomfov")?.removeFromGroup()
     }
 
     companion object {
@@ -418,6 +500,8 @@ class AirScoutMapController(
         private val CIRCLE_FILL_COLOR = Color.parseColor("#334B6EA8")
         private val FOV_STROKE_COLOR = Color.parseColor("#FFC1D034")
         private val FOV_FILL_COLOR = Color.parseColor("#33C1D034")
+        private val ZOOM_STROKE_COLOR = Color.parseColor("#FF26C6DA")
+        private val ZOOM_FILL_COLOR = Color.parseColor("#3326C6DA")
         private const val DEFAULT_HORIZONTAL_FOV = 60.0
         private const val DEFAULT_VERTICAL_FOV = 45.0
     }

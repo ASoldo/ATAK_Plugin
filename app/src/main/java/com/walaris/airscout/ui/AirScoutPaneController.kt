@@ -156,7 +156,12 @@ class AirScoutPaneController(
             AxisCamera.FrustumMode.CIRCLE -> {
                 val radius = (camera.frustumRadiusMeters ?: camera.frustumRangeMeters)?.takeIf { it > 0 }
                 radius?.let {
-                    context.getString(R.string.control_info_frustum_circle, it)
+                    val zoom = (camera.frustumZoomRadiusMeters ?: camera.frustumZoomRangeMeters)?.takeIf { z -> z > 0 && z <= it }
+                    if (zoom != null) {
+                        context.getString(R.string.control_info_frustum_circle_zoom, it, zoom)
+                    } else {
+                        context.getString(R.string.control_info_frustum_circle, it)
+                    }
                 } ?: context.getString(R.string.control_info_frustum_placeholder)
             }
             AxisCamera.FrustumMode.CONE -> {
@@ -165,13 +170,25 @@ class AirScoutPaneController(
                 val v = camera.frustumVerticalFovDeg
                 val bearing = camera.frustumBearingDeg
                 if (range != null && h != null && v != null && bearing != null) {
-                    context.getString(
-                        R.string.control_info_frustum_cone,
-                        range,
-                        h,
-                        v,
-                        bearing
-                    )
+                    val zoom = (camera.frustumZoomRangeMeters ?: camera.frustumZoomRadiusMeters)?.takeIf { z -> z > 0 && z <= range }
+                    if (zoom != null) {
+                        context.getString(
+                            R.string.control_info_frustum_cone_zoom,
+                            range,
+                            h,
+                            v,
+                            bearing,
+                            zoom
+                        )
+                    } else {
+                        context.getString(
+                            R.string.control_info_frustum_cone,
+                            range,
+                            h,
+                            v,
+                            bearing
+                        )
+                    }
                 } else {
                     context.getString(R.string.control_info_frustum_placeholder)
                 }
@@ -225,10 +242,12 @@ class AirScoutPaneController(
         val circleFields = dialogView.findViewById<LinearLayout>(R.id.circleFields)
         val coneFields = dialogView.findViewById<LinearLayout>(R.id.coneFields)
         val radiusInput = dialogView.findViewById<EditText>(R.id.inputRadius)
+        val zoomRadiusInput = dialogView.findViewById<EditText>(R.id.inputZoomRadius)
         val rangeInput = dialogView.findViewById<EditText>(R.id.inputRange)
         val horizontalInput = dialogView.findViewById<EditText>(R.id.inputHorizontalFov)
         val verticalInput = dialogView.findViewById<EditText>(R.id.inputVerticalFov)
         val bearingInput = dialogView.findViewById<EditText>(R.id.inputBearing)
+        val zoomRangeInput = dialogView.findViewById<EditText>(R.id.inputZoomRange)
 
         val location = existing?.let { GeoPoint(it.latitude, it.longitude, it.altitude) } ?: initialLocation
         location?.let {
@@ -257,6 +276,9 @@ class AirScoutPaneController(
                     radiusInput.setText(
                         (camera.frustumRadiusMeters ?: camera.frustumRangeMeters)?.toString() ?: ""
                     )
+                    zoomRadiusInput.setText(
+                        (camera.frustumZoomRadiusMeters ?: camera.frustumZoomRangeMeters)?.toString() ?: ""
+                    )
                     circleFields.visibility = View.VISIBLE
                     coneFields.visibility = View.GONE
                 }
@@ -266,6 +288,9 @@ class AirScoutPaneController(
                     horizontalInput.setText(camera.frustumHorizontalFovDeg?.toString() ?: "")
                     verticalInput.setText(camera.frustumVerticalFovDeg?.toString() ?: "")
                     bearingInput.setText(camera.frustumBearingDeg?.toString() ?: "")
+                    zoomRangeInput.setText(
+                        (camera.frustumZoomRangeMeters ?: camera.frustumZoomRadiusMeters)?.toString() ?: ""
+                    )
                     circleFields.visibility = View.GONE
                     coneFields.visibility = View.VISIBLE
                 }
@@ -280,9 +305,11 @@ class AirScoutPaneController(
             if (checkedId == R.id.radioFrustumCircle) {
                 circleFields.visibility = View.VISIBLE
                 coneFields.visibility = View.GONE
+                zoomRangeInput.setText("")
             } else {
                 circleFields.visibility = View.GONE
                 coneFields.visibility = View.VISIBLE
+                zoomRadiusInput.setText("")
             }
         }
 
@@ -353,8 +380,14 @@ class AirScoutPaneController(
 
                 when (mode) {
                     AxisCamera.FrustumMode.CIRCLE -> {
-                        val radius = radiusInput.text.toString().trim().toDoubleOrNull()
-                        if (radius == null || radius <= 0.0) {
+                        val radiusValue = radiusInput.text.toString().trim().toDoubleOrNull()
+                        val radius = radiusValue?.takeIf { it > 0.0 }
+                        if (radius == null) {
+                            Toast.makeText(context, R.string.resource_dialog_error_frustum, Toast.LENGTH_SHORT).show()
+                            return@setOnClickListener
+                        }
+                        val zoomRadius = zoomRadiusInput.text.toString().trim().toDoubleOrNull()
+                        if (zoomRadius != null && (zoomRadius <= 0.0 || zoomRadius > radius)) {
                             Toast.makeText(context, R.string.resource_dialog_error_frustum, Toast.LENGTH_SHORT).show()
                             return@setOnClickListener
                         }
@@ -364,13 +397,21 @@ class AirScoutPaneController(
                         camera.frustumHorizontalFovDeg = null
                         camera.frustumVerticalFovDeg = null
                         camera.frustumBearingDeg = null
+                        camera.frustumZoomRadiusMeters = zoomRadius
+                        camera.frustumZoomRangeMeters = null
                     }
                     AxisCamera.FrustumMode.CONE -> {
-                        val range = rangeInput.text.toString().trim().toDoubleOrNull()
+                        val rangeValue = rangeInput.text.toString().trim().toDoubleOrNull()
                         val h = horizontalInput.text.toString().trim().toDoubleOrNull()
                         val v = verticalInput.text.toString().trim().toDoubleOrNull()
                         val bearing = bearingInput.text.toString().trim().toDoubleOrNull()
-                        if (range == null || range <= 0.0 || h == null || v == null || bearing == null) {
+                        val zoomRange = zoomRangeInput.text.toString().trim().toDoubleOrNull()
+                        val range = rangeValue?.takeIf { it > 0.0 }
+                        if (range == null || h == null || v == null || bearing == null) {
+                            Toast.makeText(context, R.string.resource_dialog_error_frustum, Toast.LENGTH_SHORT).show()
+                            return@setOnClickListener
+                        }
+                        if (zoomRange != null && (zoomRange <= 0.0 || zoomRange > range)) {
                             Toast.makeText(context, R.string.resource_dialog_error_frustum, Toast.LENGTH_SHORT).show()
                             return@setOnClickListener
                         }
@@ -380,6 +421,8 @@ class AirScoutPaneController(
                         camera.frustumVerticalFovDeg = v
                         camera.frustumBearingDeg = bearing
                         camera.frustumRadiusMeters = null
+                        camera.frustumZoomRangeMeters = zoomRange
+                        camera.frustumZoomRadiusMeters = null
                     }
                 }
 
@@ -613,7 +656,14 @@ class AirScoutPaneController(
                     AxisCamera.FrustumMode.CIRCLE -> {
                         val radius = (camera.frustumRadiusMeters ?: camera.frustumRangeMeters)?.roundToInt()
                         if (radius != null && radius > 0) {
-                            ctx.getString(R.string.resource_frustum_circle_summary, radius)
+                            val zoom = (camera.frustumZoomRadiusMeters ?: camera.frustumZoomRangeMeters)
+                                ?.roundToInt()
+                                ?.takeIf { z -> z > 0 && z <= radius }
+                            if (zoom != null) {
+                                ctx.getString(R.string.resource_frustum_circle_summary_zoom, radius, zoom)
+                            } else {
+                                ctx.getString(R.string.resource_frustum_circle_summary, radius)
+                            }
                         } else {
                             ctx.getString(R.string.control_info_frustum_placeholder)
                         }
@@ -624,7 +674,14 @@ class AirScoutPaneController(
                         val v = camera.frustumVerticalFovDeg?.roundToInt()
                         val b = camera.frustumBearingDeg?.roundToInt()
                         if (range != null && h != null && v != null && b != null) {
-                            ctx.getString(R.string.resource_frustum_cone_summary, range, h, v, b)
+                            val zoom = (camera.frustumZoomRangeMeters ?: camera.frustumZoomRadiusMeters)
+                                ?.roundToInt()
+                                ?.takeIf { z -> z > 0 && z <= range }
+                            if (zoom != null) {
+                                ctx.getString(R.string.resource_frustum_cone_summary_zoom, range, h, v, b, zoom)
+                            } else {
+                                ctx.getString(R.string.resource_frustum_cone_summary, range, h, v, b)
+                            }
                         } else {
                             ctx.getString(R.string.control_info_frustum_placeholder)
                         }

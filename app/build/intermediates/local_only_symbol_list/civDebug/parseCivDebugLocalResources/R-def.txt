@@ -54,6 +54,8 @@ id inputRadius
 id inputRange
 id inputStreamUrl
 id inputVerticalFov
+id inputZoomRadius
+id inputZoomRange
 id joystickOverlay
 id overlayAddCamera
 id overlayPreview
@@ -87,7 +89,9 @@ string app_name
 string control_info_control
 string control_info_control_placeholder
 string control_info_frustum_circle
+string control_info_frustum_circle_zoom
 string control_info_frustum_cone
+string control_info_frustum_cone_zoom
 string control_info_frustum_placeholder
 string control_info_location
 string control_info_location_placeholder
@@ -103,6 +107,7 @@ string overlay_camera_description_location
 string overlay_camera_description_stream
 string overlay_camera_fov_title
 string overlay_camera_ring_title
+string overlay_camera_zoom_title
 string overlay_group_airscout
 string pane_add_video
 string pane_remove_camera
@@ -136,10 +141,14 @@ string resource_field_radius
 string resource_field_range
 string resource_field_stream
 string resource_field_vfov
+string resource_field_zoom_radius
+string resource_field_zoom_range
 string resource_frustum_circle
 string resource_frustum_circle_summary
+string resource_frustum_circle_summary_zoom
 string resource_frustum_cone
 string resource_frustum_cone_summary
+string resource_frustum_cone_summary_zoom
 string resource_list_summary
 string resource_list_title
 string resource_use_map_center

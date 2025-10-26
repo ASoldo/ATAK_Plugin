@@ -69,6 +69,12 @@ public final class DialogAirscoutResourceBinding implements ViewBinding {
   public final EditText inputVerticalFov;
 
   @NonNull
+  public final EditText inputZoomRadius;
+
+  @NonNull
+  public final EditText inputZoomRange;
+
+  @NonNull
   public final RadioButton radioFrustumCircle;
 
   @NonNull
@@ -85,6 +91,7 @@ public final class DialogAirscoutResourceBinding implements ViewBinding {
       @NonNull EditText inputLatitude, @NonNull EditText inputLongitude,
       @NonNull EditText inputName, @NonNull EditText inputRadius, @NonNull EditText inputRange,
       @NonNull EditText inputStreamUrl, @NonNull EditText inputVerticalFov,
+      @NonNull EditText inputZoomRadius, @NonNull EditText inputZoomRange,
       @NonNull RadioButton radioFrustumCircle, @NonNull RadioButton radioFrustumCone,
       @NonNull Button useMapCenterButton) {
     this.rootView = rootView;
@@ -103,6 +110,8 @@ public final class DialogAirscoutResourceBinding implements ViewBinding {
     this.inputRange = inputRange;
     this.inputStreamUrl = inputStreamUrl;
     this.inputVerticalFov = inputVerticalFov;
+    this.inputZoomRadius = inputZoomRadius;
+    this.inputZoomRange = inputZoomRange;
     this.radioFrustumCircle = radioFrustumCircle;
     this.radioFrustumCone = radioFrustumCone;
     this.useMapCenterButton = useMapCenterButton;
@@ -225,6 +234,18 @@ public final class DialogAirscoutResourceBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.inputZoomRadius;
+      EditText inputZoomRadius = ViewBindings.findChildViewById(rootView, id);
+      if (inputZoomRadius == null) {
+        break missingId;
+      }
+
+      id = R.id.inputZoomRange;
+      EditText inputZoomRange = ViewBindings.findChildViewById(rootView, id);
+      if (inputZoomRange == null) {
+        break missingId;
+      }
+
       id = R.id.radioFrustumCircle;
       RadioButton radioFrustumCircle = ViewBindings.findChildViewById(rootView, id);
       if (radioFrustumCircle == null) {
@@ -246,8 +267,8 @@ public final class DialogAirscoutResourceBinding implements ViewBinding {
       return new DialogAirscoutResourceBinding((ScrollView) rootView, circleFields, coneFields,
           inputAltitude, inputBearing, inputControlUrl, inputDescription, inputFrustumGroup,
           inputHorizontalFov, inputLatitude, inputLongitude, inputName, inputRadius, inputRange,
-          inputStreamUrl, inputVerticalFov, radioFrustumCircle, radioFrustumCone,
-          useMapCenterButton);
+          inputStreamUrl, inputVerticalFov, inputZoomRadius, inputZoomRange, radioFrustumCircle,
+          radioFrustumCone, useMapCenterButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

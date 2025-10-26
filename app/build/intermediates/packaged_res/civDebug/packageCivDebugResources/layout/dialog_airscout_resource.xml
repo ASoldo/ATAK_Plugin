@@ -164,6 +164,17 @@
                 android:maxLines="1"
                 android:textColorHint="#80FFFFFF"
                 android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/inputZoomRadius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/resource_field_zoom_radius"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:textColorHint="#80FFFFFF"
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -223,6 +234,17 @@
                 android:layout_marginTop="8dp"
                 android:hint="@string/resource_field_bearing"
                 android:inputType="numberDecimal|numberSigned"
+                android:maxLines="1"
+                android:textColorHint="#80FFFFFF"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/inputZoomRange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/resource_field_zoom_range"
+                android:inputType="numberDecimal"
                 android:maxLines="1"
                 android:textColorHint="#80FFFFFF"
                 android:textColor="@android:color/white" />
