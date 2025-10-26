@@ -12,8 +12,18 @@
         android:description="@string/app_desc"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <meta-data android:name="plugin-api" android:value="${atakApiVersion}"/>
+       <meta-data android:name="plugin-api" android:value="${atakApiVersion}"/>
         <meta-data android:name="app_desc" android:value="@string/app_desc"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
 
        <!-- This fictitious activity entry allow for ATAK 4.6.0.2 and newer to perform 

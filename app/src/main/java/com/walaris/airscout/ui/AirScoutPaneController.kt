@@ -16,11 +16,17 @@ import android.widget.RadioGroup
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.atakmap.android.maps.MapView
+import com.atakmap.android.missionpackage.api.MissionPackageApi
+import com.walaris.airscout.core.AxisCameraRepository
+import com.walaris.airscout.core.PluginStorage
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
 import com.atakmap.coremap.maps.coords.GeoPoint
 import com.walaris.airscout.R
 import com.walaris.airscout.core.AxisCamera
@@ -34,7 +40,8 @@ import kotlin.math.roundToInt
 class AirScoutPaneController(
     private val context: Context,
     private val mapController: AirScoutMapController,
-    private val cameraController: AxisCameraController
+    private val cameraController: AxisCameraController,
+    private val repository: AxisCameraRepository
 ) : DualJoystickView.JoystickListener,
     AirScoutMapController.Listener {
 
@@ -93,6 +100,15 @@ class AirScoutPaneController(
         ui.resourceRecyclerView.adapter = resourceAdapter
         ui.addResourceButton.setOnClickListener {
             promptResourceDialog(null, currentMapCenter())
+        }
+        ui.exportResourcesButton.setOnClickListener {
+            exportResources(showToast = true)
+        }
+        ui.importResourcesButton.setOnClickListener {
+            promptImportResources()
+        }
+        ui.shareResourcesButton.setOnClickListener {
+            shareResources()
         }
     }
 
@@ -215,6 +231,133 @@ class AirScoutPaneController(
             ControlInfo(R.drawable.ic_location, locationText),
             ControlInfo(R.drawable.ic_frustum, frustumText)
         )
+    }
+
+    private fun getExportsDirectory(): File =
+        PluginStorage.resolveDirectory(context, EXPORT_SUBDIR)
+
+    private fun exportResources(showToast: Boolean): File? {
+        val resources = repository.getAll()
+        if (resources.isEmpty()) {
+            if (showToast) {
+                Toast.makeText(context, R.string.resource_export_none, Toast.LENGTH_SHORT).show()
+            }
+            return null
+        }
+        val exportDir = getExportsDirectory()
+        val timestamp = SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(Date())
+        val exportFile = File(exportDir, "airscout_resources_$timestamp.airscout")
+        val success = repository.exportTo(exportFile)
+        if (success) {
+            if (showToast) {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.resource_export_success, exportFile.absolutePath),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            return exportFile
+        } else {
+            if (showToast) {
+                Toast.makeText(context, R.string.resource_export_failure, Toast.LENGTH_SHORT).show()
+            }
+        }
+        return null
+    }
+
+    private fun promptImportResources() {
+        val exportDir = getExportsDirectory()
+        val candidates = exportDir.listFiles { file ->
+            if (!file.isFile) return@listFiles false
+            when (file.extension.lowercase(Locale.US)) {
+                "airscout", "json" -> true
+                else -> false
+            }
+        }
+            ?.sortedByDescending { it.lastModified() }
+            ?: emptyList()
+        if (candidates.isEmpty()) {
+            Toast.makeText(context, R.string.resource_import_none, Toast.LENGTH_SHORT).show()
+            return
+        }
+        val names = candidates.map { it.name }.toTypedArray()
+        val dialogContext = ContextThemeWrapper(
+            binding?.root?.context ?: runCatching { MapView.getMapView().context }.getOrNull() ?: context,
+            R.style.ATAKPluginTheme
+        )
+        AlertDialog.Builder(dialogContext)
+            .setTitle(R.string.resource_import_title)
+            .setItems(names) { dialog, index ->
+                dialog.dismiss()
+                val file = candidates[index]
+                AlertDialog.Builder(dialogContext)
+                    .setTitle(R.string.resource_import_title)
+                    .setMessage(R.string.resource_import_mode_message)
+                    .setPositiveButton(R.string.resource_import_replace) { _, _ ->
+                        importResources(file, replaceExisting = true)
+                    }
+                    .setNegativeButton(R.string.resource_import_merge) { _, _ ->
+                        importResources(file, replaceExisting = false)
+                    }
+                    .setNeutralButton(android.R.string.cancel, null)
+                    .show()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun importResources(source: File, replaceExisting: Boolean) {
+        val result = repository.importFrom(source, replaceExisting)
+        if (result.total == 0) {
+            Toast.makeText(context, R.string.resource_import_failure, Toast.LENGTH_SHORT).show()
+            return
+        }
+        mapController.reloadFromRepository()
+        Toast.makeText(
+            context,
+            context.getString(R.string.resource_import_success, result.total),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun shareResources() {
+        val exportFile = exportResources(showToast = false) ?: run {
+            Toast.makeText(context, R.string.resource_export_failure, Toast.LENGTH_SHORT).show()
+            return
+        }
+        val mapView = runCatching { MapView.getMapView() }.getOrNull()
+        val shareContext = mapView?.context ?: binding?.root?.context ?: context
+        val manifest = MissionPackageApi.CreateTempManifest("airscout", true, true, null)
+            ?: run {
+                Toast.makeText(context, R.string.resource_share_failure, Toast.LENGTH_SHORT).show()
+                return
+            }
+        val timestamp = SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(Date())
+        manifest.setName(shareContext.getString(R.string.resource_share_package_name, timestamp))
+        val addedFile = manifest.addFile(exportFile, null)
+        if (!addedFile) {
+            Toast.makeText(shareContext, R.string.resource_share_failure, Toast.LENGTH_SHORT).show()
+            return
+        }
+        mapController.listCameras().forEach { manifest.addMapItem(it.uid) }
+
+        val dispatchShare: () -> Unit = {
+            MissionPackageApi.SendUIDs(shareContext, manifest, null as String?, null, true)
+            Toast.makeText(shareContext, R.string.resource_share_success, Toast.LENGTH_SHORT).show()
+        }
+
+        if (mapView != null) {
+            mapView.post {
+                runCatching { dispatchShare() }.onFailure {
+                    Toast.makeText(shareContext, R.string.resource_share_failure, Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            val result = runCatching { dispatchShare() }
+            if (result.isFailure) {
+                Toast.makeText(shareContext, R.string.resource_share_failure, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun refreshResourceList(selectUid: String? = null) {
@@ -771,5 +914,9 @@ class AirScoutPaneController(
                 deleteButton.setOnClickListener { listener.onDelete(camera) }
             }
         }
+    }
+
+    companion object {
+        private const val EXPORT_SUBDIR = "exports"
     }
 }

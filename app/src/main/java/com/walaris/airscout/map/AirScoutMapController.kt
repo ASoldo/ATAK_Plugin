@@ -113,6 +113,23 @@ class AirScoutMapController(
         listeners.forEach { it.onCameraSelected(camera) }
     }
 
+    fun reloadFromRepository() {
+        mapView.post {
+            val existingIds = cameras.keys.toList()
+            existingIds.forEach { uid ->
+                clearFrustumOverlay(uid)
+                markers.remove(uid)?.let { marker ->
+                    mapView.getRootGroup().removeItem(marker)
+                    overlay.onMarkerRemoved(uid, marker)
+                }
+            }
+            cameras.clear()
+            markers.clear()
+            repository.getAll().forEach { addOrUpdateCameraInternal(it, persist = false) }
+            listeners.forEach { it.onCameraInventoryChanged() }
+        }
+    }
+
     private fun addOrUpdateCameraInternal(camera: AxisCamera, persist: Boolean) {
         val existing = cameras[camera.uid]
         if (existing == null) {
@@ -121,6 +138,7 @@ class AirScoutMapController(
             if (persist) {
                 repository.upsert(copy)
             }
+            removeExternalMarker(copy.uid)
             val marker = createMarker(copy)
             markers[copy.uid] = marker
             mapView.getRootGroup().addItem(marker)
@@ -135,10 +153,8 @@ class AirScoutMapController(
             val marker = markers[existing.uid]
             if (marker != null) {
                 marker.setTitle(existing.displayName)
-                marker.setMetaString("callsign", existing.displayName)
-                marker.setMetaString("uid", existing.uid)
-                existing.protocol?.let { marker.setMetaString("protocol", it) }
                 marker.setPoint(GeoPoint(existing.latitude, existing.longitude, existing.altitude))
+                applyCameraMetadata(marker, existing)
                 marker.refresh(mapView.getMapEventDispatcher(), null, javaClass)
                 refreshFrustumOverlay(existing, marker)
                 overlay.onMarkerAdded(CameraMapEntry(existing.copy(), marker))
@@ -153,9 +169,7 @@ class AirScoutMapController(
         marker.setTitle(camera.displayName)
         marker.setType(CAMERA_MARKER_TYPE)
         marker.setClickable(true)
-        marker.setMetaString("callsign", camera.displayName)
-        marker.setMetaString("uid", camera.uid)
-        camera.protocol?.let { marker.setMetaString("protocol", it) }
+        applyCameraMetadata(marker, camera)
         marker.setAlwaysShowText(true)
         val resourceUri = "android.resource://${context.packageName}/${R.drawable.ic_camera_marker}"
         val icon = Icon.Builder()
@@ -462,6 +476,36 @@ class AirScoutMapController(
         mapView.getMapItem("$cameraId-fovshape")?.removeFromGroup()
         mapView.getMapItem("$cameraId-zoomring")?.removeFromGroup()
         mapView.getMapItem("$cameraId-zoomfov")?.removeFromGroup()
+    }
+
+    private fun removeExternalMarker(uid: String) {
+        val candidate = mapView.getMapItem(uid) as? Marker ?: return
+        if (markers[uid] === candidate) return
+        candidate.removeFromGroup()
+    }
+
+    private fun applyCameraMetadata(marker: Marker, camera: AxisCamera) {
+        marker.setMetaBoolean("archive", true)
+        marker.setMetaBoolean("airscout.managed", true)
+        marker.setMetaString("callsign", camera.displayName)
+        marker.setMetaString("uid", camera.uid)
+        marker.setMetaString("airscout.rtsp", camera.rtspUrl)
+        marker.setMetaString("airscout.control", camera.controlUrl)
+        marker.setMetaDouble("airscout.lat", camera.latitude)
+        marker.setMetaDouble("airscout.lon", camera.longitude)
+        marker.setMetaDouble("airscout.alt", camera.altitude)
+        marker.setMetaString("airscout.description", camera.description)
+        camera.protocol?.let { marker.setMetaString("protocol", it) }
+        camera.eventWebSocketUrl?.let { marker.setMetaString("airscout.eventWs", it) }
+        camera.username?.let { marker.setMetaString("airscout.username", it) }
+        camera.password?.let { marker.setMetaString("airscout.password", it) }
+        marker.setMetaString("airscout.frustumMode", camera.frustumMode.name)
+        camera.frustumRangeMeters?.let { marker.setMetaDouble("airscout.frustumRange", it) }
+        camera.frustumHorizontalFovDeg?.let { marker.setMetaDouble("airscout.frustumHfov", it) }
+        camera.frustumVerticalFovDeg?.let { marker.setMetaDouble("airscout.frustumVfov", it) }
+        camera.frustumRadiusMeters?.let { marker.setMetaDouble("airscout.frustumRadius", it) }
+        camera.frustumBearingDeg?.let { marker.setMetaDouble("airscout.frustumBearing", it) }
+        camera.frustumZoomLevel?.let { marker.setMetaDouble("airscout.frustumZoom", it) }
     }
 
     companion object {

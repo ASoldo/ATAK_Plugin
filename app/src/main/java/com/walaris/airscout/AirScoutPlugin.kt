@@ -2,14 +2,22 @@ package com.walaris.airscout
 
 import android.content.Context
 import android.view.View
+import com.atakmap.android.cot.detail.CotDetailManager
+import com.atakmap.android.importexport.ImporterManager
+import com.atakmap.android.importexport.MarshalManager as LegacyMarshalManager
+import com.atakmap.android.importfiles.task.ImportFilesTask
 import com.atak.plugins.impl.PluginContextProvider
 import com.atak.plugins.impl.PluginLayoutInflater
+import com.atakmap.android.maps.MapView
 import com.atakmap.coremap.maps.coords.GeoPoint
 import com.walaris.airscout.core.AxisCamera
 import com.walaris.airscout.core.AxisCameraController
 import com.walaris.airscout.core.AxisCameraRepository
+import com.walaris.airscout.cot.AirScoutDetailHandler
 import com.walaris.airscout.map.AirScoutMapController
 import com.walaris.airscout.ui.AirScoutPaneController
+import com.walaris.airscout.packaging.AirScoutResourceImporter
+import com.walaris.airscout.packaging.AirScoutResourceMarshal
 import gov.tak.api.plugin.IPlugin
 import gov.tak.api.plugin.IServiceController
 import gov.tak.api.ui.IHostUIService
@@ -33,6 +41,8 @@ class AirScoutPlugin(
     private val mapController: AirScoutMapController
     private val cameraController: AxisCameraController
     private val paneController: AirScoutPaneController
+    private val detailHandler: AirScoutDetailHandler
+    private var importRegistered = false
 
     init {
         val ctxProvider = serviceController.getService(PluginContextProvider::class.java)
@@ -45,7 +55,10 @@ class AirScoutPlugin(
         repository = AxisCameraRepository(pluginContext)
         mapController = AirScoutMapController(pluginContext, repository)
         cameraController = AxisCameraController(pluginContext)
-        paneController = AirScoutPaneController(pluginContext, mapController, cameraController)
+        paneController = AirScoutPaneController(pluginContext, mapController, cameraController, repository)
+        detailHandler = AirScoutDetailHandler(repository, mapController)
+        registerImporters()
+        AirScoutResourceImporter.bind(pluginContext, repository, mapController)
 
         toolbarItem = ToolbarItem.Builder(
             pluginContext.getString(R.string.app_name),
@@ -65,6 +78,7 @@ class AirScoutPlugin(
         uiService?.addToolbarItem(toolbarItem)
         mapController.registerListener(this)
         mapController.start()
+        CotDetailManager.getInstance().registerHandler(AirScoutDetailHandler.DETAIL_TAG, detailHandler)
     }
 
     override fun onStop() {
@@ -73,6 +87,7 @@ class AirScoutPlugin(
         mapController.stop()
         paneView?.let { paneController.unbind() }
         cameraController.shutdown()
+        CotDetailManager.getInstance().unregisterHandler(detailHandler)
         pane = null
         paneView = null
     }
@@ -133,5 +148,25 @@ class AirScoutPlugin(
     override fun onCameraEditRequested(camera: AxisCamera) {
         paneController.editCamera(camera)
         showPane()
+    }
+
+    private fun registerImporters() {
+        if (importRegistered) return
+        ImporterManager.registerImporter(AirScoutResourceImporter)
+        LegacyMarshalManager.registerMarshal(AirScoutResourceMarshal)
+        val mapView = runCatching { MapView.getMapView() }.getOrNull()
+        val registerTask = Runnable {
+            try {
+                ImportFilesTask.registerExtension(".airscout")
+            } catch (_: Exception) {
+                // ignore registration errors; extension may already be registered
+            }
+        }
+        if (mapView != null) {
+            mapView.post(registerTask)
+        } else {
+            registerTask.run()
+        }
+        importRegistered = true
     }
 }

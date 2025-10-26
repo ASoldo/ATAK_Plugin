@@ -447,6 +447,10 @@
     <string name="resource_dialog_title_add">Add AirScout Resource</string>
     <string name="resource_dialog_title_edit">Edit AirScout Resource</string>
     <string name="resource_empty_message">No AirScout resources yet. Tap the + to add an air or ground sensor.</string>
+    <string name="resource_export_button">Export resources</string>
+    <string name="resource_export_failure">Unable to export AirScout resources.</string>
+    <string name="resource_export_none">No AirScout resources to export.</string>
+    <string name="resource_export_success">Exported AirScout resources to %1$s</string>
     <string name="resource_field_altitude">Altitude (meters, optional)</string>
     <string name="resource_field_bearing">Bearing (° from north)</string>
     <string name="resource_field_control">Controller API endpoint</string>
@@ -468,15 +472,27 @@
     <string name="resource_frustum_cone">Cone</string>
     <string name="resource_frustum_cone_summary">Cone · %1$d m / %2$d°/%3$d° · %4$d°</string>
     <string name="resource_frustum_cone_summary_zoom">Cone · %1$d m / %2$d°/%3$d° · %4$d° · Zoom %5$d%%</string>
+    <string name="resource_import_button">Import resources</string>
+    <string name="resource_import_failure">Unable to import AirScout resources.</string>
+    <string name="resource_import_merge">Merge</string>
+    <string name="resource_import_mode_message">How would you like to apply the imported resources?</string>
+    <string name="resource_import_none">No exported AirScout packages found.</string>
+    <string name="resource_import_replace">Replace existing</string>
+    <string name="resource_import_success">Imported %1$d resources</string>
+    <string name="resource_import_title">Import AirScout resources</string>
     <string name="resource_list_summary">Register streaming assets with metadata, then preview and control them when needed.</string>
     <string name="resource_list_title">AirScout Resources</string>
+    <string name="resource_share_button">Share resources</string>
+    <string name="resource_share_failure">Unable to share AirScout package.</string>
+    <string name="resource_share_package_name">AirScout Resources %1$s</string>
+    <string name="resource_share_success">AirScout package queued for sharing.</string>
     <string name="resource_use_map_center">Use map center</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="status_no_cameras">No video feeds selected. Choose one to begin streaming.</string>
     <string name="status_selected_camera">Selected feed: %1$s</string>
     <string name="status_stream_error">Stream error: %1$s</string>
     <string name="toast_camera_removed">Feed removed</string>
-    <string name="versionName" translatable="false">0.1 (2355e19c) - [5.5.0]</string>
+    <string name="versionName" translatable="false">0.1 (7cb84e5b) - [5.5.0]</string>
     <style name="ATAKEditText" parent="@android:style/Widget.EditText">
         
         
@@ -788,23 +804,14 @@
         <attr format="reference" name="fontProviderCerts"/>
         
         <attr name="fontProviderFetchStrategy">
-            <!-- The blocking font fetch works as follows.
-              First, check the local cache, then if the requested font is not cached, request the
-              font from the provider and wait until it is finished.  You can change the length of
-              the timeout by modifying fontProviderFetchTimeout.  If the timeout happens, the
-              default typeface will be used instead. -->
+            
             <enum name="blocking" value="0"/>
-            <!-- The async font fetch works as follows.
-              First, check the local cache, then if the requested font is not cached, trigger a
-              request the font and continue with layout inflation. Once the font fetch succeeds, the
-              target text view will be refreshed with the downloaded font data. The
-              fontProviderFetchTimeout will be ignored if async loading is specified. -->
+            
             <enum name="async" value="1"/>
         </attr>
         
         <attr format="integer" name="fontProviderFetchTimeout">
-            <!-- A special value for the timeout. In this case, the blocking font fetching will not
-              timeout and wait until a reply is received from the font provider. -->
+            
             <enum name="forever" value="-1"/>
         </attr>
         

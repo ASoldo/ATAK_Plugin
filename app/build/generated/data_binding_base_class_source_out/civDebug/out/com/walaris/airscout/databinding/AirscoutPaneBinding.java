@@ -51,6 +51,12 @@ public final class AirscoutPaneBinding implements ViewBinding {
   public final TextView emptyMessage;
 
   @NonNull
+  public final ImageButton exportResourcesButton;
+
+  @NonNull
+  public final ImageButton importResourcesButton;
+
+  @NonNull
   public final ImageButton infoButton;
 
   @NonNull
@@ -69,6 +75,9 @@ public final class AirscoutPaneBinding implements ViewBinding {
   public final RecyclerView resourceRecyclerView;
 
   @NonNull
+  public final ImageButton shareResourcesButton;
+
+  @NonNull
   public final TextView statusMessage;
 
   @NonNull
@@ -81,11 +90,13 @@ public final class AirscoutPaneBinding implements ViewBinding {
       @NonNull ImageButton backButton, @NonNull ViewAnimator contentSwitcher,
       @NonNull LinearLayout controlContainer, @NonNull LinearLayout controlHeader,
       @NonNull TextView controlSubtitle, @NonNull TextView controlTitle,
-      @NonNull TextView emptyMessage, @NonNull ImageButton infoButton,
+      @NonNull TextView emptyMessage, @NonNull ImageButton exportResourcesButton,
+      @NonNull ImageButton importResourcesButton, @NonNull ImageButton infoButton,
       @NonNull DualJoystickView joystickOverlay, @NonNull LinearLayout resourceListContainer,
       @NonNull TextView resourceListSummary, @NonNull TextView resourceListTitle,
-      @NonNull RecyclerView resourceRecyclerView, @NonNull TextView statusMessage,
-      @NonNull ImageView videoImageView, @NonNull PlayerView videoPlayerView) {
+      @NonNull RecyclerView resourceRecyclerView, @NonNull ImageButton shareResourcesButton,
+      @NonNull TextView statusMessage, @NonNull ImageView videoImageView,
+      @NonNull PlayerView videoPlayerView) {
     this.rootView = rootView;
     this.addResourceButton = addResourceButton;
     this.backButton = backButton;
@@ -95,12 +106,15 @@ public final class AirscoutPaneBinding implements ViewBinding {
     this.controlSubtitle = controlSubtitle;
     this.controlTitle = controlTitle;
     this.emptyMessage = emptyMessage;
+    this.exportResourcesButton = exportResourcesButton;
+    this.importResourcesButton = importResourcesButton;
     this.infoButton = infoButton;
     this.joystickOverlay = joystickOverlay;
     this.resourceListContainer = resourceListContainer;
     this.resourceListSummary = resourceListSummary;
     this.resourceListTitle = resourceListTitle;
     this.resourceRecyclerView = resourceRecyclerView;
+    this.shareResourcesButton = shareResourcesButton;
     this.statusMessage = statusMessage;
     this.videoImageView = videoImageView;
     this.videoPlayerView = videoPlayerView;
@@ -181,6 +195,18 @@ public final class AirscoutPaneBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.exportResourcesButton;
+      ImageButton exportResourcesButton = ViewBindings.findChildViewById(rootView, id);
+      if (exportResourcesButton == null) {
+        break missingId;
+      }
+
+      id = R.id.importResourcesButton;
+      ImageButton importResourcesButton = ViewBindings.findChildViewById(rootView, id);
+      if (importResourcesButton == null) {
+        break missingId;
+      }
+
       id = R.id.infoButton;
       ImageButton infoButton = ViewBindings.findChildViewById(rootView, id);
       if (infoButton == null) {
@@ -217,6 +243,12 @@ public final class AirscoutPaneBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.shareResourcesButton;
+      ImageButton shareResourcesButton = ViewBindings.findChildViewById(rootView, id);
+      if (shareResourcesButton == null) {
+        break missingId;
+      }
+
       id = R.id.statusMessage;
       TextView statusMessage = ViewBindings.findChildViewById(rootView, id);
       if (statusMessage == null) {
@@ -237,8 +269,9 @@ public final class AirscoutPaneBinding implements ViewBinding {
 
       return new AirscoutPaneBinding((FrameLayout) rootView, addResourceButton, backButton,
           contentSwitcher, controlContainer, controlHeader, controlSubtitle, controlTitle,
-          emptyMessage, infoButton, joystickOverlay, resourceListContainer, resourceListSummary,
-          resourceListTitle, resourceRecyclerView, statusMessage, videoImageView, videoPlayerView);
+          emptyMessage, exportResourcesButton, importResourcesButton, infoButton, joystickOverlay,
+          resourceListContainer, resourceListSummary, resourceListTitle, resourceRecyclerView,
+          shareResourcesButton, statusMessage, videoImageView, videoPlayerView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

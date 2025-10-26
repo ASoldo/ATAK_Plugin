@@ -264,13 +264,16 @@ drawable ic_camera_marker
 drawable ic_control
 drawable ic_delete
 drawable ic_edit
+drawable ic_export
 drawable ic_frustum
+drawable ic_import
 drawable ic_info
 drawable ic_launcher
 drawable ic_location
 drawable ic_plugin_badge
 drawable ic_plugin_badge_camera
 drawable ic_preview
+drawable ic_share
 drawable ic_stream
 drawable ic_toolbar
 drawable new_dark_button_bg
@@ -402,6 +405,7 @@ id exo_text
 id exo_time
 id exo_track_selection_view
 id exo_vr
+id exportResourcesButton
 id fill
 id fit
 id fixed_height
@@ -410,6 +414,7 @@ id forever
 id hide_ime_id
 id icon
 id icon_group
+id importResourcesButton
 id info
 id infoButton
 id inputAltitude
@@ -463,6 +468,7 @@ id resourceRoot
 id resourceStream
 id right_icon
 id right_side
+id shareResourcesButton
 id spherical_gl_surface_view
 id statusMessage
 id status_bar_latest_event_content
@@ -638,6 +644,10 @@ string resource_dialog_error_required
 string resource_dialog_title_add
 string resource_dialog_title_edit
 string resource_empty_message
+string resource_export_button
+string resource_export_failure
+string resource_export_none
+string resource_export_success
 string resource_field_altitude
 string resource_field_bearing
 string resource_field_control
@@ -659,8 +669,20 @@ string resource_frustum_circle_summary_zoom
 string resource_frustum_cone
 string resource_frustum_cone_summary
 string resource_frustum_cone_summary_zoom
+string resource_import_button
+string resource_import_failure
+string resource_import_merge
+string resource_import_mode_message
+string resource_import_none
+string resource_import_replace
+string resource_import_success
+string resource_import_title
 string resource_list_summary
 string resource_list_title
+string resource_share_button
+string resource_share_failure
+string resource_share_package_name
+string resource_share_success
 string resource_use_map_center
 string status_bar_notification_info_overflow
 string status_no_cameras
@@ -737,3 +759,4 @@ styleable PlayerControlView ad_marker_color ad_marker_width animation_enabled ba
 styleable PlayerView ad_marker_color ad_marker_width animation_enabled artwork_display_mode auto_show bar_gravity bar_height buffered_color controller_layout_id default_artwork fastforward_icon fullscreen_enter_icon fullscreen_exit_icon hide_during_ads hide_on_touch image_display_mode keep_content_on_player_reset next_icon pause_icon play_icon played_ad_marker_color played_color player_layout_id previous_icon repeat_all_icon repeat_off_icon repeat_one_icon repeat_toggle_modes resize_mode rewind_icon scrubber_color scrubber_disabled_size scrubber_dragged_size scrubber_drawable scrubber_enabled_size show_buffering show_shuffle_button show_subtitle_button show_timeout show_vr_button shuffle_off_icon shuffle_on_icon shutter_background_color subtitle_off_icon subtitle_on_icon surface_type time_bar_min_update_interval touch_target_height unplayed_color use_artwork use_controller vr_icon
 styleable RecyclerView android_orientation android_clipToPadding android_descendantFocusability fastScrollEnabled fastScrollHorizontalThumbDrawable fastScrollHorizontalTrackDrawable fastScrollVerticalThumbDrawable fastScrollVerticalTrackDrawable layoutManager reverseLayout spanCount stackFromEnd
 xml com_android_vending_archive_opt_out
+xml file_paths
