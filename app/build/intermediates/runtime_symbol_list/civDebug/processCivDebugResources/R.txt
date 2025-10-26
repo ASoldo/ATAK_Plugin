@@ -251,6 +251,7 @@ int drawable exo_styled_controls_speed 0x7f05004f
 int drawable exo_styled_controls_subtitle_off 0x7f050050
 int drawable exo_styled_controls_subtitle_on 0x7f050051
 int drawable exo_styled_controls_vr 0x7f050052
+int drawable fov_control_dot 0x7f050077
 int drawable ic_add 0x7f050053
 int drawable ic_arrow_back 0x7f050054
 int drawable ic_call_answer 0x7f050055

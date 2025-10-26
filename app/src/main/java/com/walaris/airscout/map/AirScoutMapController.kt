@@ -382,7 +382,6 @@ class AirScoutMapController(
         val arrowHead = GeoCalculations.pointAtDistance(center, bearing, range)
         val arrowLeft = GeoCalculations.pointAtDistance(arrowHead, bearing + 160.0, range * 0.05)
         val arrowRight = GeoCalculations.pointAtDistance(arrowHead, bearing - 160.0, range * 0.05)
-        val midPoint = GeoCalculations.pointAtDistance(center, bearing, range * 0.5)
         arrowShape.setPoints(arrayOf(
             arrowBase,
             GeoPoint(arrowHead.latitude, arrowHead.longitude, altitude),
@@ -403,26 +402,31 @@ class AirScoutMapController(
             arrowShape.refresh(mapView.getMapEventDispatcher(), null, javaClass)
         }
 
-        val pointId = "${camera.uid}-fovpoint"
-        val existingPoint = mapView.getMapItem(pointId) as? Circle
-        val pointRadius = (range * 0.03).coerceAtLeast(5.0)
-        val pointCircle = existingPoint ?: Circle(GeoPointMetaData.wrap(midPoint), pointRadius, pointId).apply {
+        val fovTitle = context.getString(R.string.overlay_camera_fov_title, camera.displayName)
+        val controlIconUri = "android.resource://${context.packageName}/${R.drawable.fov_control_dot}"
+        val controlIcon = Icon.Builder()
+            .setImageUri(0, controlIconUri)
+            .build()
+
+        val tipMarkerId = "${camera.uid}-fovtipFOV"
+        val tipGeoPoint = GeoPoint(arrowHead.latitude, arrowHead.longitude, altitude)
+        val existingTip = mapView.getMapItem(tipMarkerId) as? Marker
+        val tipMarker = existingTip ?: Marker(tipGeoPoint, tipMarkerId).apply {
             setMetaBoolean("archive", false)
-            setMetaBoolean("editable", false)
+            setMetaBoolean("editable", true)
+            setClickable(true)
+            setType(FOV_CONTROL_MARKER_TYPE)
         }
-        pointCircle.setCenterPoint(GeoPointMetaData.wrap(GeoPoint(midPoint.latitude, midPoint.longitude, altitude)))
-        pointCircle.setRadius(pointRadius)
-        pointCircle.setColor(FOV_STROKE_COLOR)
-        pointCircle.setStrokeColor(FOV_STROKE_COLOR)
-        pointCircle.setStrokeWeight(2.0)
-        pointCircle.setFillColor(Color.TRANSPARENT)
-        pointCircle.setMetaString("parent_uid", camera.uid)
-        pointCircle.setMetaString("callsign", context.getString(R.string.overlay_camera_fov_title, camera.displayName))
-        pointCircle.setTitle(context.getString(R.string.overlay_camera_fov_title, camera.displayName))
-        if (existingPoint == null) {
-            mapView.getRootGroup().addItem(pointCircle)
+        tipMarker.setPoint(tipGeoPoint)
+        tipMarker.setIcon(controlIcon)
+        tipMarker.setTitle(fovTitle)
+        tipMarker.setMetaString("parent_uid", camera.uid)
+        tipMarker.setMetaString("callsign", fovTitle)
+        tipMarker.setMetaString("control_role", "endpoint")
+        if (existingTip == null) {
+            mapView.getRootGroup().addItem(tipMarker)
         } else {
-            pointCircle.refresh(mapView.getMapEventDispatcher(), null, javaClass)
+            tipMarker.refresh(mapView.getMapEventDispatcher(), null, javaClass)
         }
     }
 
@@ -430,7 +434,7 @@ class AirScoutMapController(
         mapView.getMapItem("$cameraId-ring")?.removeFromGroup()
         mapView.getMapItem("$cameraId-fovshape")?.removeFromGroup()
         mapView.getMapItem("$cameraId-fovarrow")?.removeFromGroup()
-        mapView.getMapItem("$cameraId-fovpoint")?.removeFromGroup()
+        mapView.getMapItem("$cameraId-fovtipFOV")?.removeFromGroup()
     }
 
     companion object {
@@ -441,5 +445,6 @@ class AirScoutMapController(
         private val FOV_FILL_COLOR = Color.parseColor("#33C1D034")
         private const val DEFAULT_HORIZONTAL_FOV = 60.0
         private const val DEFAULT_VERTICAL_FOV = 45.0
+        private const val FOV_CONTROL_MARKER_TYPE = "b-walaris-airscout-fov-control"
     }
 }
