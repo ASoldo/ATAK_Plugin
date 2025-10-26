@@ -36,20 +36,16 @@
         "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/layout/overlay_airscout_footer.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_airscout_edit.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_airscout_edit.xml"
-    },
-    {
         "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_add.xml.flat",
         "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_add.xml"
     },
     {
-        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_arrow_back.xml.flat",
-        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_arrow_back.xml"
-    },
-    {
         "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_plugin_badge.xml.flat",
         "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_plugin_badge.xml"
+    },
+    {
+        "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/drawable_ic_arrow_back.xml.flat",
+        "source": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-main-20:/drawable/ic_arrow_back.xml"
     },
     {
         "merged": "/home/rootster/.gradle/daemon/8.13/com.walaris.airscout.app-civDebug-17:/layout_dialog_airscout_resource.xml.flat",

@@ -13,6 +13,7 @@ import com.atakmap.android.widgets.WidgetIcon
 import com.atakmap.android.widgets.MapWidget
 import com.atakmap.android.menu.PluginMenuParser
 import com.atakmap.android.maps.MapDataRef
+import com.walaris.airscout.R
 import gov.tak.api.widgets.IMapMenuButtonWidget
 
 class AirScoutMenuFactory(
@@ -50,7 +51,7 @@ class AirScoutMenuFactory(
         }
 
         val menu = MapMenuWidget()
-        menu.addWidget(createButton(MenuAction.RESOURCES, "icons/menu.png"))
+        menu.addWidget(createButton(MenuAction.RESOURCES, "icons/airscout_menu.png"))
         menu.addWidget(createButton(MenuAction.EDIT, "icons/edit.png"))
         menu.addWidget(createButton(MenuAction.PREVIEW, "icons/video.png"))
         return menu
@@ -75,8 +76,12 @@ class AirScoutMenuFactory(
     }
 
     private fun buildIcon(path: String): WidgetIcon {
-        val pluginAsset = PluginMenuParser.getItem(context, path)
-        val uri = if (pluginAsset.isNotEmpty()) pluginAsset else "asset:///$path"
+        val uri = if (path.startsWith("android.resource://")) {
+            path
+        } else {
+            val pluginAsset = PluginMenuParser.getItem(context, path)
+            if (pluginAsset.isNotEmpty()) pluginAsset else "asset:///$path"
+        }
         val mapDataRef = MapDataRef.parseUri(uri)
         return WidgetIcon.Builder()
             .setImageRef(0, mapDataRef)
