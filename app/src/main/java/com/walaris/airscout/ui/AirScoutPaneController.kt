@@ -38,6 +38,7 @@ class AirScoutPaneController(
     private var contentMode: ContentMode = ContentMode.LIST
     private var currentCamera: AxisCamera? = null
     private var pendingSelectUid: String? = null
+    private var pendingEditCamera: AxisCamera? = null
 
     private val resourceAdapter = ResourceAdapter(object : ResourceAdapter.Listener {
         override fun onPreview(camera: AxisCamera) {
@@ -58,8 +59,18 @@ class AirScoutPaneController(
         mapController.registerListener(this)
         setupListUi()
         setupControlUi()
-        showList()
-        refreshResourceList()
+
+        val editTarget = pendingEditCamera
+        if (editTarget == null) {
+            showList()
+            refreshResourceList()
+        } else {
+            pendingEditCamera = null
+            pendingSelectUid = editTarget.uid
+            showList(editTarget.uid)
+            refreshResourceList(editTarget.uid)
+            promptResourceDialog(editTarget, null)
+        }
     }
 
     fun unbind() {
@@ -94,7 +105,7 @@ class AirScoutPaneController(
         ui.statusMessage.text = context.getString(R.string.status_no_cameras)
         currentCamera = null
         pendingSelectUid = selectUid
-        resourceAdapter.setSelected(selectUid)
+        resourceAdapter.setSelected(null)
     }
 
     private fun showControl(camera: AxisCamera) {
@@ -502,8 +513,13 @@ class AirScoutPaneController(
 
     fun editCamera(camera: AxisCamera) {
         binding?.root?.post {
-            pendingSelectUid = camera.uid
-            promptResourceDialog(camera, null)
+            val bound = binding != null
+            if (!bound) {
+                pendingEditCamera = camera
+            } else {
+                pendingSelectUid = camera.uid
+                promptResourceDialog(camera, null)
+            }
         }
     }
 

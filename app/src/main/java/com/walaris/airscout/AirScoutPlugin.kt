@@ -131,7 +131,7 @@ class AirScoutPlugin(
     }
 
     override fun onCameraEditRequested(camera: AxisCamera) {
-        showPane()
         paneController.editCamera(camera)
+        showPane()
     }
 }
