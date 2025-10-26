@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.walaris.airscout"
-    android:versionCode="1761488241"
-    android:versionName="0.1 (8f3fb24b) - [5.5.0]" >
+    android:versionCode="1761490872"
+    android:versionName="0.1 (69284e57) - [5.5.0]" >
 
     <uses-sdk
         android:minSdkVersion="21"

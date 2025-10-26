@@ -2,14 +2,19 @@ package com.walaris.airscout.ui
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
+import android.util.TypedValue
 import android.view.ContextThemeWrapper
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +44,7 @@ class AirScoutPaneController(
     private var currentCamera: AxisCamera? = null
     private var pendingSelectUid: String? = null
     private var pendingEditCamera: AxisCamera? = null
-    private var currentInfoDetails: List<Pair<Int, String>> = emptyList()
+    private var currentInfoDetails: List<ControlInfo> = emptyList()
 
     private val resourceAdapter = ResourceAdapter(object : ResourceAdapter.Listener {
         override fun onPreview(camera: AxisCamera) {
@@ -204,10 +209,10 @@ class AirScoutPaneController(
         }
 
         currentInfoDetails = listOf(
-            R.string.control_info_label_stream to streamText,
-            R.string.control_info_label_control to controlText,
-            R.string.control_info_label_location to locationText,
-            R.string.control_info_label_frustum to frustumText
+            ControlInfo(R.drawable.ic_stream, streamText),
+            ControlInfo(R.drawable.ic_control, controlText),
+            ControlInfo(R.drawable.ic_location, locationText),
+            ControlInfo(R.drawable.ic_frustum, frustumText)
         )
     }
 
@@ -492,20 +497,60 @@ class AirScoutPaneController(
             ?: binding?.root?.context
             ?: context
         val themedContext = ContextThemeWrapper(baseContext, R.style.ATAKPluginTheme)
-        val message = buildString {
-            currentInfoDetails.forEachIndexed { index, (labelRes, value) ->
-                if (index > 0) append('\n')
-                append(context.getString(labelRes))
-                append(": ")
-                append(value)
+        if (currentInfoDetails.isEmpty()) {
+            AlertDialog.Builder(themedContext)
+                .setTitle(context.getString(R.string.control_info_dialog_title))
+                .setMessage(context.getString(R.string.control_info_dialog_empty))
+                .setPositiveButton(android.R.string.ok, null)
+                .show()
+            return
+        }
+
+        val density = themedContext.resources.displayMetrics.density
+        val listContainer = LinearLayout(themedContext).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(0, 0, 0, 0)
+        }
+        currentInfoDetails.forEach { entry ->
+            val row = LinearLayout(themedContext).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER_VERTICAL
+                val pad = (6 * density).toInt()
+                setPadding(0, pad, 0, pad)
             }
-        }.ifBlank { context.getString(R.string.control_info_dialog_empty) }
+            val iconView = ImageView(themedContext).apply {
+                setImageResource(entry.iconRes)
+                setColorFilter(Color.WHITE)
+            }
+            val iconParams = LinearLayout.LayoutParams((20 * density).toInt(), (20 * density).toInt()).apply {
+                marginEnd = (12 * density).toInt()
+            }
+            row.addView(iconView, iconParams)
+
+            val textView = TextView(themedContext).apply {
+                text = entry.value
+                setTextColor(Color.WHITE)
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+            }
+            row.addView(textView, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+            listContainer.addView(row)
+        }
+
+        val scrollView = ScrollView(themedContext).apply {
+            val padH = (16 * density).toInt()
+            val padV = (12 * density).toInt()
+            setPadding(padH, padV, padH, padV)
+            addView(listContainer)
+        }
+
         AlertDialog.Builder(themedContext)
             .setTitle(context.getString(R.string.control_info_dialog_title))
-            .setMessage(message)
+            .setView(scrollView)
             .setPositiveButton(android.R.string.ok, null)
             .show()
     }
+
+    private data class ControlInfo(val iconRes: Int, val value: String)
 
     // Joystick listener
     override fun onLeftJoystickChanged(x: Float, y: Float, active: Boolean) {

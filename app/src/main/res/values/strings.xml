@@ -40,10 +40,6 @@
     <string name="control_info_frustum_cone">Frustum: Cone %1$.0f m, %2$.0f°/%3$.0f°, bearing %4$.0f°</string>
     <string name="control_info_frustum_cone_zoom">Frustum: Cone %1$.0f m, %2$.0f°/%3$.0f°, bearing %4$.0f°, zoom %5$.0f%%</string>
     <string name="control_info_button_content_description">Camera details</string>
-    <string name="control_info_label_stream">Stream</string>
-    <string name="control_info_label_control">Control</string>
-    <string name="control_info_label_location">Location</string>
-    <string name="control_info_label_frustum">Frustum</string>
     <string name="control_info_dialog_title">Camera details</string>
     <string name="control_info_dialog_empty">Details unavailable.</string>
     <string name="resource_action_preview">Preview and focus</string>

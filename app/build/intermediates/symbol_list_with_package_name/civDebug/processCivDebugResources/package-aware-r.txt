@@ -552,10 +552,6 @@ string control_info_frustum_circle_zoom
 string control_info_frustum_cone
 string control_info_frustum_cone_zoom
 string control_info_frustum_placeholder
-string control_info_label_control
-string control_info_label_frustum
-string control_info_label_location
-string control_info_label_stream
 string control_info_location
 string control_info_location_placeholder
 string control_info_stream
