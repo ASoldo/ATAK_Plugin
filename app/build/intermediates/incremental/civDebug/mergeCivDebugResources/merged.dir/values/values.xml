@@ -473,7 +473,7 @@
     <string name="status_selected_camera">Selected feed: %1$s</string>
     <string name="status_stream_error">Stream error: %1$s</string>
     <string name="toast_camera_removed">Feed removed</string>
-    <string name="versionName" translatable="false">0.1 (33ca5a8d) - [5.5.0]</string>
+    <string name="versionName" translatable="false">0.1 (60e0a26e) - [5.5.0]</string>
     <style name="ATAKEditText" parent="@android:style/Widget.EditText">
         
         
