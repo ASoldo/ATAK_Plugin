@@ -324,10 +324,9 @@ class AirScoutMapController(
         mapView.getRootGroup().addItem(circle)
 
         val zoomId = "${camera.uid}-zoomring"
-        val zoomRadius = (camera.frustumZoomRadiusMeters ?: camera.frustumZoomRangeMeters)
-            ?.takeIf { it > 0 }
-            ?.coerceAtMost(radius)
-        if (zoomRadius != null) {
+        val zoomLevel = camera.frustumZoomLevel?.takeIf { it > 0.0 }
+        val zoomRadius = zoomLevel?.let { (radius * it).coerceIn(0.0, radius) }
+        if (zoomRadius != null && zoomRadius > 0.0) {
             val existingZoom = mapView.getMapItem(zoomId) as? Circle
             val zoomCircle = existingZoom ?: Circle(GeoPointMetaData.wrap(marker.point), zoomRadius, zoomId).apply {
                 setMetaBoolean("archive", false)
@@ -436,12 +435,15 @@ class AirScoutMapController(
             arrowShape.refresh(mapView.getMapEventDispatcher(), null, javaClass)
         }
 
-        val zoomRangeCandidate = camera.frustumZoomRangeMeters
-            ?: camera.frustumZoomRadiusMeters
-        val zoomRange = zoomRangeCandidate?.takeIf { it > 0 }
+        val zoomLevel = camera.frustumZoomLevel?.takeIf { it > 0.0 }
         val zoomShapeId = "${camera.uid}-zoomfov"
-        if (zoomRange != null) {
-            val zoomRatio = (zoomRange / range).coerceIn(0.05, 1.0)
+        if (zoomLevel != null) {
+            val ratio = zoomLevel.coerceIn(0.0, 1.0)
+            if (ratio <= 0.0) {
+                mapView.getMapItem(zoomShapeId)?.removeFromGroup()
+                return
+            }
+            val zoomRatio = ratio.coerceAtLeast(0.01)
             val zoomHorizontalFov = horizontalFov * zoomRatio
             val zoomVerticalFov = verticalFov * zoomRatio
             val zoomStartAzimuth = bearing - zoomHorizontalFov / 2.0
@@ -474,6 +476,7 @@ class AirScoutMapController(
             zoomShape.setMetaDouble("hfov", zoomHorizontalFov)
             zoomShape.setMetaDouble("vfov", zoomVerticalFov)
             zoomShape.setMetaDouble("range", range)
+            zoomShape.setMetaDouble("zoom_level", zoomRatio)
             zoomShape.setTitle(context.getString(R.string.overlay_camera_zoom_title, camera.displayName))
             if (existingZoomShape == null) {
                 mapView.getRootGroup().addItem(zoomShape)

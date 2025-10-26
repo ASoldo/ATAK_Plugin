@@ -26,8 +26,7 @@ data class AxisCamera(
     var frustumVerticalFovDeg: Double? = null,
     var frustumRadiusMeters: Double? = null,
     var frustumBearingDeg: Double? = null,
-    var frustumZoomRangeMeters: Double? = null,
-    var frustumZoomRadiusMeters: Double? = null
+    var frustumZoomLevel: Double? = null
 ) {
 
     fun toJson(): JSONObject = JSONObject().apply {
@@ -49,8 +48,7 @@ data class AxisCamera(
         frustumVerticalFovDeg?.let { put(KEY_FRUSTUM_VFOV, it) }
         frustumRadiusMeters?.let { put(KEY_FRUSTUM_RADIUS, it) }
         frustumBearingDeg?.let { put(KEY_FRUSTUM_BEARING, it) }
-        frustumZoomRangeMeters?.let { put(KEY_FRUSTUM_ZOOM_RANGE, it) }
-        frustumZoomRadiusMeters?.let { put(KEY_FRUSTUM_ZOOM_RADIUS, it) }
+        frustumZoomLevel?.let { put(KEY_FRUSTUM_ZOOM_LEVEL, it) }
     }
 
     fun updateFrom(other: AxisCamera) {
@@ -71,8 +69,7 @@ data class AxisCamera(
         frustumVerticalFovDeg = other.frustumVerticalFovDeg
         frustumRadiusMeters = other.frustumRadiusMeters
         frustumBearingDeg = other.frustumBearingDeg
-        frustumZoomRangeMeters = other.frustumZoomRangeMeters
-        frustumZoomRadiusMeters = other.frustumZoomRadiusMeters
+        frustumZoomLevel = other.frustumZoomLevel
     }
 
     companion object {
@@ -94,8 +91,7 @@ data class AxisCamera(
         private const val KEY_FRUSTUM_VFOV = "frustumVerticalFov"
         private const val KEY_FRUSTUM_RADIUS = "frustumRadius"
         private const val KEY_FRUSTUM_BEARING = "frustumBearing"
-        private const val KEY_FRUSTUM_ZOOM_RANGE = "frustumZoomRange"
-        private const val KEY_FRUSTUM_ZOOM_RADIUS = "frustumZoomRadius"
+        private const val KEY_FRUSTUM_ZOOM_LEVEL = "frustumZoomLevel"
 
         fun fromJson(payload: JSONObject): AxisCamera = AxisCamera(
             uid = payload.optString(KEY_UID, UUID.randomUUID().toString()),
@@ -118,8 +114,7 @@ data class AxisCamera(
             frustumVerticalFovDeg = payload.optDouble(KEY_FRUSTUM_VFOV, Double.NaN).takeIf { !it.isNaN() },
             frustumRadiusMeters = payload.optDouble(KEY_FRUSTUM_RADIUS, Double.NaN).takeIf { !it.isNaN() },
             frustumBearingDeg = payload.optDouble(KEY_FRUSTUM_BEARING, Double.NaN).takeIf { !it.isNaN() },
-            frustumZoomRangeMeters = payload.optDouble(KEY_FRUSTUM_ZOOM_RANGE, Double.NaN).takeIf { !it.isNaN() },
-            frustumZoomRadiusMeters = payload.optDouble(KEY_FRUSTUM_ZOOM_RADIUS, Double.NaN).takeIf { !it.isNaN() }
+            frustumZoomLevel = payload.optDouble(KEY_FRUSTUM_ZOOM_LEVEL, Double.NaN).takeIf { !it.isNaN() }
         )
     }
 

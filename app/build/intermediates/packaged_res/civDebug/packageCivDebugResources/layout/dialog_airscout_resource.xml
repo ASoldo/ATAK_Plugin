@@ -166,11 +166,11 @@
                 android:textColor="@android:color/white" />
 
             <EditText
-                android:id="@+id/inputZoomRadius"
+                android:id="@+id/inputZoomLevelCircle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/resource_field_zoom_radius"
+                android:hint="@string/resource_field_zoom_level"
                 android:inputType="numberDecimal"
                 android:maxLines="1"
                 android:textColorHint="#80FFFFFF"
@@ -239,11 +239,11 @@
                 android:textColor="@android:color/white" />
 
             <EditText
-                android:id="@+id/inputZoomRange"
+                android:id="@+id/inputZoomLevelCone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/resource_field_zoom_range"
+                android:hint="@string/resource_field_zoom_level"
                 android:inputType="numberDecimal"
                 android:maxLines="1"
                 android:textColorHint="#80FFFFFF"

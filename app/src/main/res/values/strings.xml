@@ -36,9 +36,9 @@
     <string name="control_info_location">Location: %1$.5f°, %2$.5f°%3$s</string>
     <string name="control_info_frustum_placeholder">Frustum pending</string>
     <string name="control_info_frustum_circle">Frustum: Circle (%1$.0f m)</string>
-    <string name="control_info_frustum_circle_zoom">Frustum: Circle (%1$.0f m, zoom %2$.0f m)</string>
+    <string name="control_info_frustum_circle_zoom">Frustum: Circle (%1$.0f m, zoom %2$.0f%%)</string>
     <string name="control_info_frustum_cone">Frustum: Cone %1$.0f m, %2$.0f°/%3$.0f°, bearing %4$.0f°</string>
-    <string name="control_info_frustum_cone_zoom">Frustum: Cone %1$.0f m, %2$.0f°/%3$.0f°, bearing %4$.0f°, zoom %5$.0f m</string>
+    <string name="control_info_frustum_cone_zoom">Frustum: Cone %1$.0f m, %2$.0f°/%3$.0f°, bearing %4$.0f°, zoom %5$.0f%%</string>
     <string name="resource_action_preview">Preview and focus</string>
     <string name="resource_action_edit">Edit resource</string>
     <string name="resource_action_delete">Remove resource</string>
@@ -59,8 +59,7 @@
     <string name="resource_field_hfov">Horizontal FOV (°)</string>
     <string name="resource_field_vfov">Vertical FOV (°)</string>
     <string name="resource_field_bearing">Bearing (° from north)</string>
-    <string name="resource_field_zoom_radius">Zoom radius (meters)</string>
-    <string name="resource_field_zoom_range">Zoom range (meters)</string>
+    <string name="resource_field_zoom_level">Zoom level (0-1)</string>
     <string name="resource_dialog_title_add">Add AirScout Resource</string>
     <string name="resource_dialog_title_edit">Edit AirScout Resource</string>
     <string name="resource_dialog_error_required">Name and stream URL are required.</string>
@@ -72,7 +71,7 @@
     <string name="resource_delete_confirm_positive">Remove</string>
     <string name="resource_delete_confirm_negative">Cancel</string>
     <string name="resource_frustum_circle_summary">Circle · %1$d m</string>
-    <string name="resource_frustum_circle_summary_zoom">Circle · %1$d m · Zoom %2$d m</string>
+    <string name="resource_frustum_circle_summary_zoom">Circle · %1$d m · Zoom %2$d%%</string>
     <string name="resource_frustum_cone_summary">Cone · %1$d m / %2$d°/%3$d° · %4$d°</string>
-    <string name="resource_frustum_cone_summary_zoom">Cone · %1$d m / %2$d°/%3$d° · %4$d° · Zoom %5$d m</string>
+    <string name="resource_frustum_cone_summary_zoom">Cone · %1$d m / %2$d°/%3$d° · %4$d° · Zoom %5$d%%</string>
 </resources>

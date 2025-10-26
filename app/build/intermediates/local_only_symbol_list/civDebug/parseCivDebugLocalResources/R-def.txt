@@ -54,8 +54,8 @@ id inputRadius
 id inputRange
 id inputStreamUrl
 id inputVerticalFov
-id inputZoomRadius
-id inputZoomRange
+id inputZoomLevelCircle
+id inputZoomLevelCone
 id joystickOverlay
 id overlayAddCamera
 id overlayPreview
@@ -141,8 +141,7 @@ string resource_field_radius
 string resource_field_range
 string resource_field_stream
 string resource_field_vfov
-string resource_field_zoom_radius
-string resource_field_zoom_range
+string resource_field_zoom_level
 string resource_frustum_circle
 string resource_frustum_circle_summary
 string resource_frustum_circle_summary_zoom
