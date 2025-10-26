@@ -111,7 +111,7 @@ class AirScoutPaneController(
             ui.controlSubtitle.text = camera.description
         }
         updateControlInfo(camera)
-        updateStatus(context.getString(R.string.status_selected_camera, camera.displayName))
+        updateStatus("")
         startStream(camera)
     }
 
